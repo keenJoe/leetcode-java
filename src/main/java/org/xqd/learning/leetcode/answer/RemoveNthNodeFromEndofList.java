@@ -99,4 +99,27 @@ public class RemoveNthNodeFromEndofList {
         target.next = target.next.next; // remove the node.
         return head;
     }
+
+    /**
+     * 还有一种思路，是快慢节点的方式
+     * 但是没有明白快慢节点的原理是什么！
+     * **/
+    public ListNode removedNthFromEnd2(ListNode head, int n) {
+        ListNode slow=head,fast=head;
+
+        for(int i=0;i<n;i++)
+            fast=fast.next;
+
+        if(fast==null)
+            return head.next;
+
+        while(fast.next!=null){
+            slow=slow.next;
+            fast=fast.next;
+        }
+
+        slow.next=slow.next.next;
+
+        return head;
+    }
 }
