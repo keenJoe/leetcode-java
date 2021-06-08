@@ -66,4 +66,37 @@ public class RemoveNthNodeFromEndofList {
 
         return findLinkedListLength(head.next) + 1;
     }
+
+    /**
+     * from discussion of leetocde
+     * 如果只需要确定一个节点的位置，那么完全不需要计算list的长度，只需要通过一个值一直累加到n值就可以了
+     * 这样避免了一次list计算会提高速度，降低了runtime和memory
+     * 尽量减少无意义的变量和计算，这样都会降低runtime和memory
+     * **/
+    public ListNode removedNthFromEnd(ListNode head, int n){
+        /**
+         * 1. find target node to remove from the linked list.
+         */
+        int count = 1;
+        ListNode cursor = head;
+        ListNode target = head;
+        int distanceFromTempToCursor = 0;
+        while (cursor.next != null) {
+            cursor = cursor.next;
+            count++;
+
+            if (distanceFromTempToCursor < n) {
+                distanceFromTempToCursor++; // update distance.
+            } else {
+                target = target.next; // move target to keep the distance = n.
+            }
+        }
+
+        if (n == count) {
+            return head.next;
+        }
+
+        target.next = target.next.next; // remove the node.
+        return head;
+    }
 }
