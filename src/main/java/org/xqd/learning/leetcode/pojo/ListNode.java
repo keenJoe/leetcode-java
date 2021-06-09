@@ -36,4 +36,8 @@ public class ListNode {
     public void setNext(ListNode next) {
         this.next = next;
     }
+
+    public void resetNext(ListNode listNode){
+        this.next = listNode;
+    }
 }
