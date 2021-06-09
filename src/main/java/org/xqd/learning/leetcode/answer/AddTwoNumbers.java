@@ -52,6 +52,7 @@ public class AddTwoNumbers {
             int quotient = sum / 10;
             int left = sum % 10;
 
+            //carry = digit / 10; 一个语句解决了自己的if-else语句判断
             if (quotient != 0) {
                 carry = quotient;
             } else {
@@ -76,6 +77,7 @@ public class AddTwoNumbers {
             int quotient = sum / 10;
             int left = sum % 10;
 
+            //carry = digit / 10;
             if (quotient != 0) {
                 carry = quotient;
             } else {
@@ -95,6 +97,7 @@ public class AddTwoNumbers {
             int quotient = sum / 10;
             int left = sum % 10;
 
+            //carry = digit / 10;
             if (quotient != 0) {
                 carry = quotient;
             } else {
@@ -108,6 +111,7 @@ public class AddTwoNumbers {
             l2 = l2.next;
         }
 
+        //其实这个很容易被遗漏
         if (carry != 0) {
             ListNode newNode = new ListNode(carry);
             pre.next = newNode;
@@ -115,5 +119,31 @@ public class AddTwoNumbers {
         }
 
         return dummyNode.next;
+    }
+
+    public ListNode addTwoNumbersByHandbook(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = l1, q = l2, curr = dummyHead;
+        int carry = 0;
+
+        /**
+         * 我的解题思路和这个一样，只是它一个while循环解决了我的三个while循环
+         * 既然三个while循环如此相像，那么一定能够提取出公共的部分
+         * 😂
+         * **/
+        while (p != null || q != null) {
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+            int digit = carry + x + y;
+            carry = digit / 10;
+            curr.next = new ListNode(digit % 10);
+            curr = curr.next;
+            if (p != null) p = p.next;
+            if (q != null) q = q.next;
+        }
+        if (carry > 0) {
+            curr.next = new ListNode(carry);
+        }
+        return dummyHead.next;
     }
 }
