@@ -8,15 +8,15 @@ import org.xqd.learning.leetcode.pojo.ListNode;
  */
 public class LinkedListCycle {
     public static void main(String[] args) throws InterruptedException {
-//        ListNode node7 = new ListNode(8, null);
-//        ListNode node6 = new ListNode(7, node7);
-//        ListNode node5 = new ListNode(4, node6);
-//        ListNode node4 = new ListNode(5, node5);
-//        ListNode node3 = new ListNode(4, node4);
-        ListNode node2 = new ListNode(1, null);
+        ListNode node7 = new ListNode(8, null);
+        ListNode node6 = new ListNode(7, node7);
+        ListNode node5 = new ListNode(4, node6);
+        ListNode node4 = new ListNode(5, node5);
+        ListNode node3 = new ListNode(4, node4);
+        ListNode node2 = new ListNode(1, node3);
         ListNode node1 = new ListNode(1, node2);
         ListNode head = new ListNode(1, node1);
-       // node7.resetNext(node3);
+        node7.resetNext(node3);
 
         ListNode temp = head;
 
@@ -48,11 +48,15 @@ public class LinkedListCycle {
         while(first != null && second != null){
 
             //遗漏了一种情况，就是1->1->1的情况
-            if(first.val == second.val){
-                count++;
-                if(count > 1){
-                    return true;
-                }
+//            if(first.val == second.val){
+//                count++;
+//                if(count > 1){
+//                    return true;
+//                }
+//            }
+
+            if(first == second){
+                return true;
             }
 
             first = first.next;
