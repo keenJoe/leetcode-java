@@ -4,14 +4,14 @@ import org.xqd.learning.leetcode.pojo.ListNode;
 
 /**
  * @author XuQidong
- * @date 2021/6/12 20:56
+ * @date 2021/6/13 20:54
  */
-public class LinkedListCycleII {
+public class SortList {
     public static void main(String[] args){
 
     }
 
-    public ListNode detectCycle(ListNode head) {
+    public ListNode sortList(ListNode head) {
         ListNode dummyNode = new ListNode(0);
         ListNode pre = dummyNode;
         pre.next = head;
