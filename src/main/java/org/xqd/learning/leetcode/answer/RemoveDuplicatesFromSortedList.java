@@ -4,6 +4,7 @@ import org.xqd.learning.leetcode.pojo.ListNode;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.prefs.PreferenceChangeEvent;
 
 /**
  * @author XuQidong
@@ -12,11 +13,11 @@ import java.util.Set;
 public class RemoveDuplicatesFromSortedList {
 
     public static void main(String[] args) throws InterruptedException {
-//        ListNode node6 = new ListNode(7, null);
-//        ListNode node5 = new ListNode(5, node6);
-//        ListNode node4 = new ListNode(5, node5);
-//        ListNode node3 = new ListNode(3, null);
-        ListNode node2 = new ListNode(1, null);
+        ListNode node6 = new ListNode(7, null);
+        ListNode node5 = new ListNode(5, node6);
+        ListNode node4 = new ListNode(5, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(1, node3);
         ListNode node1 = new ListNode(1, node2);
         ListNode head = new ListNode(1, node1);
 
@@ -28,7 +29,7 @@ public class RemoveDuplicatesFromSortedList {
         }
     }
 
-    public static ListNode deleteDuplicates(ListNode head) {
+    public static ListNode deleteDuplicates1(ListNode head) {
         Set<Integer> set = new HashSet<>();
 
         ListNode dummyHead = new ListNode(0);
@@ -63,5 +64,27 @@ public class RemoveDuplicatesFromSortedList {
         }
 
         return dummyHead.next;
+    }
+
+    public static ListNode deleteDuplicates(ListNode head) {
+        if(head == null) return head;
+        //ListNode dummyNode = new ListNode(0);
+        ListNode dummyNode = head;
+//        ListNode pre = dummyNode;
+//        pre.next = head;
+        //ListNode cur = head.next;
+        //dummyNode.next = head;
+
+        while(head != null && head.next != null){
+            if(head.val == head.next.val){
+                head.next = head.next.next;
+                //cur = cur.next;
+            } else {
+                head = head.next;
+                //cur = head.next;
+            }
+        }
+
+        return dummyNode;
     }
 }
