@@ -1,0 +1,6 @@
+160: Intersection of Two Linked Lists
+既然两个linked list有相交的点，而且在相交的点之后所有的节点内容都一致，这就很好办了。
+首先判断两个list的长度。
+然后将长度较大的list的head向后移动n位，让两个list长度相同。
+TODO 现在我有一点想不通，就是为什么 headA.val != headB.val 为什么不能用它作为条件呢？
+还有就是要注意编码，很明显，两个for循环比自己写的while循环要好很多，而且这种写法在LeetCode handbook上也经常看到。
