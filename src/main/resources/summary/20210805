@@ -4,3 +4,8 @@
 然后将长度较大的list的head向后移动n位，让两个list长度相同。
 TODO 现在我有一点想不通，就是为什么 headA.val != headB.val 为什么不能用它作为条件呢？
 还有就是要注意编码，很明显，两个for循环比自己写的while循环要好很多，而且这种写法在LeetCode handbook上也经常看到。
+
+1669: Merge In Between Linked Lists
+思路很清晰，根据a和b的值确定被截取的list的前一个节点和后一个节点，这样直接将list2放在两个节点中间就可以，通过next进行衔接。
+但是在这道题中，自己的边界问题处理的不好，经过了好多次尝试才成功。
+TODO 在linked list中，一定要注意next问题，因为这个会比索引走的更快。
