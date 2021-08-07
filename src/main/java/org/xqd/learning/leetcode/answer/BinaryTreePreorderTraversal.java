@@ -36,21 +36,4 @@ public class BinaryTreePreorderTraversal {
 
         return list;
     }
-
-    public List<Integer> traversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        TreeNode rootLeft = null;
-        TreeNode rootRight = null;
-        if (root.left != null) {
-            rootLeft = root.left;
-            list.add(rootLeft.val);
-            list.addAll(traversal(rootLeft));
-        } else if (root.right != null) {
-            rootRight = root.right;
-            list.add(rootRight.val);
-            list.addAll(traversal(rootRight));
-        }
-
-        return list;
-    }
 }
