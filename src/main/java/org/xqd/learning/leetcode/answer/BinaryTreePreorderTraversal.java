@@ -11,14 +11,19 @@ import java.util.Stack;
  * @date 2021/8/7 23:00
  */
 public class BinaryTreePreorderTraversal {
-    public static void main(String[] args) {
-        TreeNode root = new TreeNode(2);
-        //TreeNode four = new TreeNode(4);
+    public static void main(String[] args) throws InterruptedException {
+        TreeNode root = new TreeNode(1);
+//        TreeNode two = new TreeNode(2);
+//        TreeNode one = new TreeNode(1);
+//        TreeNode five = new TreeNode(5);
+//        two.left = one;
+//        one.left = five;
+//        root.left = two;
+        TreeNode four = new TreeNode(4);
+        root.left = four;
+        four.left = new TreeNode(2);
         TreeNode three = new TreeNode(3);
-        TreeNode one = new TreeNode(1);
-        root.left = three;
-        root.right = null;
-        three.left = one;
+        root.right = three;
 
         List<Integer> list = preorderTraversal1(root);
         System.out.println(list.toString());
@@ -40,43 +45,23 @@ public class BinaryTreePreorderTraversal {
         return list;
     }
 
-    public static List<Integer> preorderTraversal1(TreeNode root) {
+    public static List<Integer> preorderTraversal1(TreeNode root) throws InterruptedException {
         List<Integer> list = new ArrayList<>();
-        if (root == null) return list;
         Stack<TreeNode> stack = new Stack<>();
+        if (root == null) return list;
         stack.add(root);
 
-        while (root != null) {
+        while (!stack.empty()) {
+            System.out.println(root.val);
             list.add(root.val);
-            if (stack.empty()) return list;
 
             if (root.left != null) {
-                if (root.left.left != null || root.left.right != null) {
-                    stack.add(root.left);
-                }
-
                 root = root.left;
+                stack.add(root);
             } else if (root.right != null) {
                 stack.pop();
-                if (root.right.left != null || root.right.right != null) {
-                    stack.add(root.right);
-                }
-
                 root = root.right;
-            } else {
-                if(!stack.empty()){
-                    root = stack.pop();
-                    if(root != null && root.right != null) {
-                        root = root.right;
-                        stack.add(root.right);
-                    } else {
-                        if(!stack.empty()){
-                            root = stack.pop();
-                        } else {
-                            return list;
-                        }
-                    }
-                }
+                stack.add(root);
             }
         }
 
