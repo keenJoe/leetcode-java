@@ -25,9 +25,6 @@ public class PartitionList {
     public ListNode partition(ListNode head, int x) throws InterruptedException {
         if (head == null || head.next == null) return head;
 
-        ListNode dummyNode = new ListNode(0);
-        dummyNode.next = head;
-
         ListNode lessThanLinkedListNode = new ListNode(0);
         ListNode firstNode = lessThanLinkedListNode;
         ListNode greaterThanLinkedListNode = new ListNode(0);
@@ -36,26 +33,66 @@ public class PartitionList {
         while (head != null) {
             if (head.val < x) {
                 lessThanLinkedListNode.next = head;
-                lessThanLinkedListNode = lessThanLinkedListNode.next;
+                lessThanLinkedListNode = head;
             } else {
                 greaterThanLinkedListNode.next = head;
-                greaterThanLinkedListNode = greaterThanLinkedListNode.next;
+                greaterThanLinkedListNode = head;
             }
 
             head = head.next;
         }
 
-        lessThanLinkedListNode.next = null;
         greaterThanLinkedListNode.next = null;
+        lessThanLinkedListNode.next = interactionNode.next;
+        return firstNode.next;
+    }
 
-        if (firstNode.next == null) {
-            dummyNode.next = interactionNode.next;
-        } else if (interactionNode.next == null) {
-            dummyNode.next = firstNode.next;
-        } else {
-            lessThanLinkedListNode.next = interactionNode.next;
-            dummyNode.next = firstNode.next;
+    public ListNode partition2(ListNode head, int x) throws InterruptedException {
+        if (head == null || head.next == null) return head;
+
+        ListNode dummyNode = new ListNode(0);
+        ListNode lessThanLinkedListNode = new ListNode(0);
+        dummyNode.next = lessThanLinkedListNode;
+
+        ListNode greater = head;
+        ListNode less = head;
+
+        System.out.println("*******");
+
+        ListNode temp = null;
+        while (less != null) {
+            System.out.println(less.val);
+            if (less.val < x) {
+                lessThanLinkedListNode.next = less;
+                lessThanLinkedListNode = lessThanLinkedListNode.next;
+            }
+
+            less = less.next;
+
+            if(less.val < x){
+                temp = less;
+            }
         }
+
+        System.out.println("*******");
+
+        while(greater != null){
+            System.out.println(greater.val);
+            greater = greater.next;
+        }
+//
+//        while(greater != null){
+//            System.out.println(greater.val);
+//            if(greater.val >= x){
+//                lessThanLinkedListNode.next = greater;
+////                System.out.println(lessThanLinkedListNode.val);
+//                lessThanLinkedListNode = lessThanLinkedListNode.next;
+//            }
+//
+//            greater = greater.next;
+//        }
+//
+//        lessThanLinkedListNode.next = null;
 
         return dummyNode.next;
     }
