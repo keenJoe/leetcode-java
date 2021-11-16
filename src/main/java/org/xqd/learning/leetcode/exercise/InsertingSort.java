@@ -15,6 +15,11 @@ public class InsertingSort {
         }
     }
 
+    /**
+     * 默认0位置的元素是有序，从index = 1开始排序
+     * 然后不断地向前寻找最小的位置，最后插入
+     * @param arr
+     */
     public void sortByInserting(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             int j = i;
