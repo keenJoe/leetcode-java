@@ -30,13 +30,31 @@ public class SelectingSort {
 //                }
 //                j++;
 //            }
+            int min = i;
+
             for (int j = i + 1; j < array.length; j++) {
-                if (array[j] < array[i]) {
-                    int t = array[i];
-                    array[i] = array[j];
-                    array[j] = t;
+
+                /**
+                 * 但是很明显，这里可以继续优化
+                 * 每次比较都做交换，这个根本没有必要。
+                 * 只需要找出最小位置即可，然后做一次交换。
+                 * 所以N个元素只需要做N次交换。
+                 */
+                if (array[j] < array[min]) {
+                    min = j;
+//                    int t = array[i];
+//                    array[i] = array[j];
+//                    array[j] = t;
                 }
             }
+
+            swap(array, i, min);
         }
+    }
+
+    private void swap(int[] array, int j, int i) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 }
