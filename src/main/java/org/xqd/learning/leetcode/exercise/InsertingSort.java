@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class InsertingSort {
     public static void main(String[] args) {
         int[] array = {3, 4, 1, 5, 2, 7, 9, 8};
-        new InsertingSort().sortByInserting(array);
+        new InsertingSort().sortByInserting2(array);
         for (int i : array) {
             System.out.println(i);
         }
@@ -18,6 +18,7 @@ public class InsertingSort {
     /**
      * 默认0位置的元素是有序，从index = 1开始排序
      * 然后不断地向前寻找最小的位置，最后插入
+     *
      * @param arr
      */
     public void sortByInserting(int[] arr) {
@@ -42,5 +43,13 @@ public class InsertingSort {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+
+    public void sortByInserting2(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i; j > 0 && array[j] < array[j - 1]; j--) {
+                swap(array, j, j - 1);
+            }
+        }
     }
 }

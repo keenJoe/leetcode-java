@@ -22,7 +22,7 @@ public class BubbleSort {
     public void sortByBubble(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int j = 0;
-            while (j + 1 < array.length) {
+            while (j + 1 < array.length - i) {
                 if(array[j] > array[j+1]) {
                     int t = array[j];
                     array[j] = array[j+1];
