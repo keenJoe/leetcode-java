@@ -1,4 +1,4 @@
-package org.xqd.learning.leetcode.exercise;
+package org.xqd.learning.leetcode.sort;
 
 /**
  * @author XuQidong

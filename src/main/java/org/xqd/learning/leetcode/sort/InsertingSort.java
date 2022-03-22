@@ -1,6 +1,4 @@
-package org.xqd.learning.leetcode.exercise;
-
-import java.util.Arrays;
+package org.xqd.learning.leetcode.sort;
 
 /**
  * @author XuQidong
