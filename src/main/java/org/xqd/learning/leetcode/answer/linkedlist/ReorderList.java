@@ -29,9 +29,87 @@ public class ReorderList {
     }
 
     /**
-     * without queue
+     * TODO
      */
     public static void reorderList(ListNode head) {
+        int index = 0;
+        int length = getListLength(head);
+        int stackStartIndex = length / 2 + 1;
+        ListNode tempNode = head;
+        ListNode tempNode1 = head;
+        ListNode tempNode2 = head;
+        ListNode preNode = null;
+        ListNode fakeHead = new ListNode();
+        ListNode dummyNode = fakeHead;
+
+        while (tempNode != null) {
+            if (index >= stackStartIndex) {
+                preNode.next = null;
+                dummyNode.next = tempNode;
+                dummyNode = dummyNode.next;
+            }
+
+            preNode = tempNode;
+            tempNode = tempNode.next;
+            index++;
+        }
+
+        int fakeLength = getListLength(fakeHead.next);
+        index = 0;
+        fakeHead = fakeHead.next;
+        while (index < fakeLength) {
+            ListNode tempNext = tempNode1.next;  //2,
+            ListNode fakeNext = fakeHead.next;   //7
+            fakeHead.next = null;
+
+            tempNode1.next = fakeHead;    //8,
+            tempNode1 = tempNode1.next;   //8,
+            tempNode1.next = tempNext;    //8-->2
+            tempNode1 = tempNode1.next;
+
+            index++;
+        }
+
+        head = tempNode2;
+    }
+
+    /**
+     * 快慢指针思想
+     */
+    public void reorderList3(ListNode head) {
+        if(head == null || head.next == null) return;
+
+        ListNode fast = head, slow = head;
+        while(fast.next != null && fast.next.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }//slow is preMid
+
+        ListNode preMid = slow;
+        ListNode cur = slow.next;//cur is mid
+        while(cur.next != null){
+            ListNode next = cur.next;
+            cur.next = next.next;
+            next.next = preMid.next;
+            preMid.next = next;
+        }
+
+        ListNode p1 = head;
+        ListNode p2 = preMid.next;
+
+        while(p1 != preMid){
+            preMid.next = p2.next;
+            p2.next = p1.next;
+            p1.next = p2;
+            p1 = p2.next;
+            p2 = preMid.next;
+        }
+    }
+
+    /**
+     * without queue
+     */
+    public static void reorderList2(ListNode head) {
         Stack<ListNode> stack = new Stack<>();
         int index = 0;
         int length = getListLength(head);

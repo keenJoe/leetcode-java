@@ -16,25 +16,23 @@ public class InsertingSort {
     /**
      * 默认0位置的元素是有序，从index = 1开始排序
      * 然后不断地向前寻找最小的位置，最后插入
-     *
-     * @param arr
      */
     public void sortByInserting(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             int j = i;
             int temp = arr[i];
+
+            //将较大的元素向后移动，找到可以insert的位置
             while (j > 0 && temp < arr[j - 1]) {
                 arr[j] = arr[j - 1];
                 j--;
             }
 
+            //j就是最后确认可以insert的位置
             if (i != j) {
                 arr[j] = temp;
             }
         }
-
-        System.out.println("**********");
-        //return arr;
     }
 
     private void swap(int[] array, int j, int i) {
