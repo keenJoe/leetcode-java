@@ -16,18 +16,71 @@ public class InsertionSortList {
         ListNode node2 = new ListNode(4, node3);
         ListNode head1 = new ListNode(3, node2);
 
-        insertionSortList(head1);
+        ListNode listNode = insertionSortList(head1);
+        while (listNode != null) {
+            System.out.println(listNode.val);
+            listNode = listNode.next;
+        }
     }
 
     public static ListNode insertionSortList(ListNode head) {
-        ListNode next = head.next;
-        ListNode first = head;
-        while (next != null) {
-            ListNode temp = next;
+        if (head.next == null) return head;
 
-            next = next.next;
+        //从第二个node开始插入排序的遍历
+        ListNode unsortedHead = head.next;
+
+        ListNode sortedHead = head;
+        //让sorted list 保持独立
+        sortedHead.next = null;
+
+        ListNode sortedHeadPre = null;
+
+        ListNode dummySortedHead = head;
+
+        ListNode tempHead = null;
+
+        while (unsortedHead != null) {
+            //find palce to insert
+            while (sortedHead != null && unsortedHead.val > sortedHead.val) {
+                if (sortedHeadPre == null) {
+                    //保留第一个节点的信息
+                    dummySortedHead = sortedHead;
+                }
+                sortedHeadPre = sortedHead;
+                sortedHead = sortedHead.next;
+            }
+
+            //has found the place to insert
+            if (sortedHeadPre == null) {
+                ListNode tempSortedHead = sortedHead;
+                ListNode tempUnsortedHead = unsortedHead.next;
+                unsortedHead.next = null;
+
+                sortedHead = unsortedHead;
+                sortedHead.next = tempSortedHead;
+
+                unsortedHead = tempUnsortedHead;
+            } else {
+                ListNode tempUnsortedHead = unsortedHead.next;
+                unsortedHead.next = null;
+
+                if (sortedHead == null) {
+                    //说明被插入的位置是sorted list 的末尾
+                    sortedHeadPre.next = unsortedHead;
+                } else {
+                    //说明被插入的位置是sorted list 的中间
+                    sortedHeadPre.next = unsortedHead;
+                    unsortedHead.next = sortedHead;
+                }
+
+                sortedHead = dummySortedHead;
+                unsortedHead = tempUnsortedHead;
+            }
+
+            tempHead = sortedHead;
+            sortedHeadPre = null;
         }
 
-        return null;
+        return tempHead;
     }
 }
