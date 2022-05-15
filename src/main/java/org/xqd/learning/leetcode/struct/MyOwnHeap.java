@@ -78,9 +78,10 @@ public class MyOwnHeap {
     }
 
     private void sink(int[] heap, int index, int i) {
-        int left;
-        while ((left = index * 2 + 1) < i) {
-            int largesIndex = left + 1 < i && heap[left + 1] < heap[left] ? left : left + 1;
+        int left = index * 2 + 1;
+        while (left < i) {
+            //这个判断条件很重要left + 1 < i && heap[left + 1] < heap[left] ? left : left + 1;
+            int largesIndex = left + 1 < i && heap[left + 1] > heap[left] ? left + 1 : left;
             largesIndex = heap[largesIndex] > heap[index] ? largesIndex : index;
             if (largesIndex == index) {
                 break;
@@ -88,6 +89,7 @@ public class MyOwnHeap {
 
             swap(heap, index, largesIndex);
             index = largesIndex;
+            left = index * 2 + 1;
         }
     }
 
@@ -109,5 +111,13 @@ public class MyOwnHeap {
         int temp = heap[childIndex];
         heap[childIndex] = heap[parentIndex];
         heap[parentIndex] = temp;
+    }
+
+    public void heapSort() {
+        swap(heap, 0, --size);
+        while (size > 0) {
+            sink(heap, 0, size);
+            swap(heap, 0, --size);
+        }
     }
 }

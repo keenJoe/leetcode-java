@@ -32,15 +32,10 @@ public class TestingHeap {
             System.out.println(i);
         }
 
-        System.out.println("**********run pop()**********");
-
-        int pop = myOwnHeap.pop();
-        System.out.println(pop);
-
-        System.out.println("**********after run pop()**********");
-
-        for (int i = 0; i < myOwnHeap.getSize(); i++) {
-            System.out.println(myOwnHeap.getHeap()[i]);
+        System.out.println("*******run heapSort()********");
+        myOwnHeap.heapSort();
+        for (int i : myOwnHeap.getHeap()) {
+            System.out.println(i);
         }
     }
 }
