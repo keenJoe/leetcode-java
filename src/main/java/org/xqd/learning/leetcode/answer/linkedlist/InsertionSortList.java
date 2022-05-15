@@ -54,6 +54,7 @@ public class InsertionSortList {
             if (sortedHeadPre == null) {
                 ListNode tempSortedHead = sortedHead;
                 ListNode tempUnsortedHead = unsortedHead.next;
+                //让节点保持独立，和后续的next断开
                 unsortedHead.next = null;
 
                 sortedHead = unsortedHead;
@@ -63,13 +64,9 @@ public class InsertionSortList {
             } else {
                 ListNode tempUnsortedHead = unsortedHead.next;
                 unsortedHead.next = null;
+                sortedHeadPre.next = unsortedHead;
 
-                if (sortedHead == null) {
-                    //说明被插入的位置是sorted list 的末尾
-                    sortedHeadPre.next = unsortedHead;
-                } else {
-                    //说明被插入的位置是sorted list 的中间
-                    sortedHeadPre.next = unsortedHead;
+                if (sortedHead != null) {
                     unsortedHead.next = sortedHead;
                 }
 
