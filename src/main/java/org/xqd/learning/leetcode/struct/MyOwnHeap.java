@@ -51,25 +51,15 @@ public class MyOwnHeap {
 
     /**
      * 堆的节点位置索引也是从0开始，和数组一样。
+     *
      * @param heap
-     * @param size
-     * insert 方法会将末尾的元素不停地向上调整，直到child节点小于parent节点
+     * @param size insert 方法会将末尾的元素不停地向上调整，直到child节点小于parent节点
      */
     public void heapInsert(int[] heap, int size) {
-        int parentIndex = (size - 1) / 2;
-        int parentNode = heap[parentIndex];
-
         int currentIndex = size;
-        int currentNode = heap[currentIndex];
-
-        while (currentNode > parentNode) {
-            swap(heap, parentIndex, currentIndex);
-            currentIndex = parentIndex;
-
-            parentIndex = (currentIndex - 1) / 2;
-            parentNode = heap[parentIndex];
-
-            currentNode = heap[currentIndex];
+        while (heap[currentIndex] > heap[(currentIndex - 1) / 2]) {
+            swap(heap, (currentIndex - 1) / 2, currentIndex);
+            currentIndex = (currentIndex - 1) / 2;
         }
     }
 
