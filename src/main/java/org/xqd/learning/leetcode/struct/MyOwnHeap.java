@@ -33,20 +33,62 @@ public class MyOwnHeap {
         this.heap = heap;
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public MyOwnHeap(int limit) {
         this.heap = new int[limit];
         this.limit = limit;
         this.size = 0;
     }
 
+    /**
+     * 添加一个元素到堆中
+     *
+     * @param node
+     */
     public void push(int node) {
         if (heap.length > limit) {
             throw new RuntimeException("heap is full");
         }
 
         heap[size] = node;
-        heapInsert(heap, size);
+        swim(heap, size);
         size++;
+    }
+
+    /**
+     * 返回堆顶的元素
+     *
+     * @return
+     */
+    public int pop() {
+        int firstNode = heap[0];
+        int lastNode = heap[--size];
+        heap[0] = lastNode;
+
+        sink(heap, 0, size);
+
+        return firstNode;
+    }
+
+    private void sink(int[] heap, int index, int i) {
+        int left;
+        while ((left = index * 2 + 1) < i) {
+            int largesIndex = left + 1 < i && heap[left + 1] < heap[left] ? left : left + 1;
+            largesIndex = heap[largesIndex] > heap[index] ? largesIndex : index;
+            if (largesIndex == index) {
+                break;
+            }
+
+            swap(heap, index, largesIndex);
+            index = largesIndex;
+        }
     }
 
     /**
@@ -55,7 +97,7 @@ public class MyOwnHeap {
      * @param heap
      * @param size insert 方法会将末尾的元素不停地向上调整，直到child节点小于parent节点
      */
-    public void heapInsert(int[] heap, int size) {
+    public void swim(int[] heap, int size) {
         int currentIndex = size;
         while (heap[currentIndex] > heap[(currentIndex - 1) / 2]) {
             swap(heap, (currentIndex - 1) / 2, currentIndex);
