@@ -1,5 +1,7 @@
 package org.xqd.learning.leetcode.struct;
 
+import java.util.Comparator;
+
 /**
  * @author XuQidong
  * @date 2022/5/15 15:26
@@ -24,6 +26,7 @@ public class MyOwnHeap {
     private int[] heap;
     private int size;
     private int limit;
+    private Comparator<Integer> comparator;
 
     public int[] getHeap() {
         return heap;
@@ -45,6 +48,14 @@ public class MyOwnHeap {
         this.heap = new int[limit];
         this.limit = limit;
         this.size = 0;
+        this.comparator = Comparator.comparingInt(c -> c);
+    }
+
+    public MyOwnHeap(int limit, Comparator<Integer> comparator) {
+        this.heap = new int[limit];
+        this.limit = limit;
+        this.size = 0;
+        this.comparator = comparator;
     }
 
     /**
@@ -54,6 +65,7 @@ public class MyOwnHeap {
      */
     public void push(int node) {
         if (heap.length > limit) {
+            //TODO to increase the limit when the size equeals to the threshold of heap
             throw new RuntimeException("heap is full");
         }
 
@@ -101,7 +113,7 @@ public class MyOwnHeap {
      */
     public void swim(int[] heap, int size) {
         int currentIndex = size;
-        while (heap[currentIndex] > heap[(currentIndex - 1) / 2]) {
+        while (comparator.compare(heap[currentIndex], heap[(currentIndex - 1) / 2]) > 0) {
             swap(heap, (currentIndex - 1) / 2, currentIndex);
             currentIndex = (currentIndex - 1) / 2;
         }

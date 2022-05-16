@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  */
 public class TestingHeap {
     public static void main(String[] args) {
-        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
         queue.add(2);
         queue.add(4);
         queue.add(1);
@@ -21,7 +21,7 @@ public class TestingHeap {
 
         System.out.println("*******************");
 
-        MyOwnHeap myOwnHeap = new MyOwnHeap(5);
+        MyOwnHeap myOwnHeap = new MyOwnHeap(5, (c1, c2) -> c2 - c1);
         myOwnHeap.push(2);
         myOwnHeap.push(4);
         myOwnHeap.push(1);
@@ -33,9 +33,9 @@ public class TestingHeap {
         }
 
         System.out.println("*******run heapSort()********");
-        myOwnHeap.heapSort();
-        for (int i : myOwnHeap.getHeap()) {
-            System.out.println(i);
-        }
+//        myOwnHeap.heapSort();
+//        for (int i : myOwnHeap.getHeap()) {
+//            System.out.println(i);
+//        }
     }
 }
