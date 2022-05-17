@@ -44,6 +44,9 @@ public class MyOwnHeap {
         this.size = size;
     }
 
+    /**
+     * 默认创建一个大根堆
+     */
     public MyOwnHeap(int limit) {
         this.heap = new int[limit];
         this.limit = limit;
@@ -51,6 +54,9 @@ public class MyOwnHeap {
         this.comparator = Comparator.comparingInt(c -> c);
     }
 
+    /**
+     * 通过comparator可以自由地指定比较规则
+     */
     public MyOwnHeap(int limit, Comparator<Integer> comparator) {
         this.heap = new int[limit];
         this.limit = limit;
@@ -125,6 +131,9 @@ public class MyOwnHeap {
         heap[parentIndex] = temp;
     }
 
+    /**
+     * 要加入参区别正序or倒序，如果是一个已经排序好的堆，则直接返回
+     */
     public void heapSort() {
         swap(heap, 0, --size);
         while (size > 0) {

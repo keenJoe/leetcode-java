@@ -33,9 +33,9 @@ public class TestingHeap {
         }
 
         System.out.println("*******run heapSort()********");
-//        myOwnHeap.heapSort();
-//        for (int i : myOwnHeap.getHeap()) {
-//            System.out.println(i);
-//        }
+        myOwnHeap.heapSort();
+        for (int i : myOwnHeap.getHeap()) {
+            System.out.println(i);
+        }
     }
 }
