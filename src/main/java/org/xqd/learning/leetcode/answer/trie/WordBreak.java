@@ -9,11 +9,23 @@ import java.util.List;
  * LeetCode 139. Word Break
  */
 public class WordBreak {
-    public static void main(String[] args) {
+    class Node {
+        private int pass;
+        private int end;
+        private Trie.Node[] nodes;
 
+        public Node() {
+            pass = 0;
+            end = 0;
+            nodes = new Trie.Node[26];
+        }
     }
 
     public boolean wordBreak(String s, List<String> wordDict) {
         return false;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
