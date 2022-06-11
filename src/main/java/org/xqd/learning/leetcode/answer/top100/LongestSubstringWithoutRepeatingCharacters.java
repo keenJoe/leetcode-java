@@ -14,7 +14,7 @@ import java.util.Map;
  * LeetCode 3. Longest Substring Without Repeating Characters
  */
 public class LongestSubstringWithoutRepeatingCharacters {
-    public static int lengthOfLongestSubstring(String s) {
+    public static int lengthOfLongestSubstring1(String s) {
         Map<Character, Integer> map = new HashMap<>();
         int start = 0, end = 0;
         boolean isInterrupted = false;
@@ -46,9 +46,24 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return end - start + 1;
     }
 
+    public static int lengthOfLongestSubstring(String s) {
+        boolean[] exist = new boolean[100];
+        int i = 0, maxLen = 0;
+        for (int j = 0; j < s.length(); j++) {
+            while (exist[s.charAt(j)]) {
+                exist[s.charAt(i)] = false;
+                i++;
+            }
+
+            exist[s.charAt(j)] = true;
+            maxLen = Math.max(j - i + 1, maxLen);
+        }
+        return maxLen;
+    }
+
     public static void main(String[] args) {
 //        String s = "pwwkew";
-        String s = "nfpdmpi";
+        String s = "abcca";
         System.out.println(lengthOfLongestSubstring(s));
     }
 }
