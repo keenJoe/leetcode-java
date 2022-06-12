@@ -6,11 +6,18 @@ package org.xqd.learning.leetcode.pojo;
  */
 public class TreeNode {
     public int val;
+
     public TreeNode left;
     public TreeNode right;
 
     public TreeNode() {}
     public TreeNode(int val) { this.val = val; }
+
+    public TreeNode(TreeNode left, TreeNode right) {
+        this.left = left;
+        this.right = right;
+    }
+
     public TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
