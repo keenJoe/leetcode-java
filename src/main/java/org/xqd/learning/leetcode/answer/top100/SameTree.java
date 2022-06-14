@@ -16,17 +16,25 @@ public class SameTree {
         } else if (p == null || q == null) {
             return false;
         } else {
-            if (p.val != q.val) {
-                return false;
-            }
+//            if (p.val != q.val) {
+//                return false;
+//            }
+//
+//            /**
+//             * 自己在这里纠结了超级久
+//             */
+//            boolean sameTree = isSameTree(p.left, q.left);
+//            if (sameTree) return isSameTree(p.right, q.right);
 
             /**
-             * 自己在这里纠结了超级久
+             * 这个答案更容易理解，也更加地清晰
              */
-            boolean sameTree = isSameTree(p.left, q.left);
-            if (sameTree) return isSameTree(p.right, q.right);
+            if((p.val != q.val) || !isSameTree(p.left, q.left) || !isSameTree(p.right, q.right)){
+                return false;
+            }
         }
 
-        return false;
+        return true;
+        //return false;
     }
 }
