@@ -23,6 +23,7 @@ public class AddBinary {
             }
 
             if (charB != ' ') {
+
                 int numberA = Character.getNumericValue(charA);
                 int numberB = Character.getNumericValue(charB);
                 int c = 0;
@@ -53,7 +54,42 @@ public class AddBinary {
         return String.valueOf(result).trim();
     }
 
+    /**
+     * 自己的思路和这个答案类似，但是这个每一步都是对自己答案的简化
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public String addBinary1(String a, String b) {
+        StringBuffer sb = new StringBuffer();
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        int carry = 0;
+
+        while (i >= 0 || j >= 0) {
+            int sum = carry;
+            if (i >= 0) {
+                sum += a.charAt(i--) - '0';
+            }
+            if (j >= 0) {
+                sum += b.charAt(j--) - '0';
+            }
+            //sb.insert(0,sum%2);
+            sb.append(sum % 2);
+            carry = sum / 2;
+        }
+
+        if (carry != 0) {
+            sb.append(carry);
+        }
+
+        return sb.reverse().toString();
+    }
+
     public static void main(String[] args) {
         System.out.println(addBinary("110010", "100"));
+        StringBuffer buffer = new StringBuffer();
+        buffer.reverse().toString();
     }
 }
