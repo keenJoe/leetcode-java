@@ -1,10 +1,6 @@
 package org.xqd.learning.leetcode.answer.top100;
 
-import javax.management.relation.Relation;
-import javax.sound.midi.Soundbank;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,9 +8,11 @@ import java.util.Map;
  * @date 2022/5/21 23:02
  * <p>
  * LeetCode 3. Longest Substring Without Repeating Characters
+ *
+ * TODO
  */
 public class LongestSubstringWithoutRepeatingCharacters {
-    public static int lengthOfLongestSubstring1(String s) {
+    public static int lengthOfLongestSubstring(String s) {
         Map<Character, Integer> map = new HashMap<>();
         int start = 0, end = 0;
         boolean isInterrupted = false;
@@ -46,24 +44,9 @@ public class LongestSubstringWithoutRepeatingCharacters {
         return end - start + 1;
     }
 
-    public static int lengthOfLongestSubstring(String s) {
-        boolean[] exist = new boolean[100];
-        int i = 0, maxLen = 0;
-        for (int j = 0; j < s.length(); j++) {
-            while (exist[s.charAt(j)]) {
-                exist[s.charAt(i)] = false;
-                i++;
-            }
-
-            exist[s.charAt(j)] = true;
-            maxLen = Math.max(j - i + 1, maxLen);
-        }
-        return maxLen;
-    }
-
     public static void main(String[] args) {
 //        String s = "pwwkew";
-        String s = "abcca";
+        String s = "nfpdmpi";
         System.out.println(lengthOfLongestSubstring(s));
     }
 }
