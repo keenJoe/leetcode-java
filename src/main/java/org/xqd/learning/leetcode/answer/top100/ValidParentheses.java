@@ -33,6 +33,24 @@ public class ValidParentheses {
         if (stack.size() > 0) return false;
 
 
+        /**
+         * bad codes
+         */
+//        Map<Character, Character> map = new HashMap<>();
+//        map.put('{', '}');
+//        map.put('(', ')');
+//        map.put('[', ']');
+//
+//        int length = s.length();
+//        char[] chars = s.toCharArray();
+//        for (int i = 0; i < length / 2 + 1; i++) {
+//            int j = --length;
+//
+//            if (map.get(chars[i]) != chars[j]) {
+//                return false;
+//            }
+//        }
+
         return true;
     }
 

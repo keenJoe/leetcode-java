@@ -10,15 +10,26 @@ public class RemoveDuplicatesFromSortedArray {
         int start = 0;
         int end = 0;
 
+//        for (int i = 0; i < nums.length; i++) {
+//            end = i;
+//            if (nums[end] != nums[start]) {
+//                if (start + 1 != end) {
+//                    nums[start + 1] = nums[end];
+//                    start++;
+//                } else {
+//                    start = end;
+//                }
+//            }
+//        }
+
+        /**
+         * 对比一下上下的代码，上面的代码有很大的优化余地
+         */
         for (int i = 0; i < nums.length; i++) {
             end = i;
             if (nums[end] != nums[start]) {
-                if (start + 1 != end) {
-                    nums[start + 1] = nums[end];
-                    start++;
-                } else {
-                    start = end;
-                }
+                nums[start+1] = nums[end];
+                start++;
             }
         }
 
