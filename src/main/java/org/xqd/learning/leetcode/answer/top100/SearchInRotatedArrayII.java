@@ -1,2 +1,4 @@
-package org.xqd.learning.leetcode.answer.top100;public class SearchInRotatedArrayII {
+package org.xqd.learning.leetcode.answer.top100;
+
+public class SearchInRotatedArrayII {
 }

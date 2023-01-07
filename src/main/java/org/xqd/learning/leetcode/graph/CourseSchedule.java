@@ -10,12 +10,83 @@ import java.util.*;
 public class CourseSchedule {
 
     public static void main(String[] args) {
-        int[][] courses = {{2, 0}, {1, 0}, {3, 1}, {3, 2}, {1, 3}};
-        boolean b = canFinish(4, courses);
-        System.out.println(b);
+//        int[][] courses = {{2, 0}, {1, 0}, {3, 1}, {3, 2}, {1, 3}};
+//        boolean b = canFinish(4, courses);
+//        System.out.println(b);
     }
 
-    public static boolean canFinish(int numCourses, int[][] prerequisites) {
+    /**
+     * 使用图的方式
+     */
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+
+        return false;
+    }
+
+    public boolean isCanFinish(Graph graph) {
+        HashMap<Node, Integer> inMap = new HashMap<>();
+        // 只有剩余入度为0的点，才进入这个队列
+        Queue<Node> zeroInQueue = new LinkedList<>();
+        for (Node node : graph.nodes.values()) {
+            inMap.put(node, node.in);
+            if (node.in == 0) {
+                zeroInQueue.add(node);
+            }
+        }
+        List<Node> result = new ArrayList<>();
+        while (!zeroInQueue.isEmpty()) {
+            Node cur = zeroInQueue.poll();
+            result.add(cur);
+            for (Node next : cur.nexts) {
+                inMap.put(next, inMap.get(next) - 1);
+                if (inMap.get(next) == 0) {
+                    zeroInQueue.add(next);
+                }
+            }
+        }
+
+        return result.size() <= 0;
+    }
+
+    static class Graph {
+        public HashMap<Integer, Node> nodes;
+        public HashSet<Edge> edges;
+
+        public Graph() {
+            nodes = new HashMap<>();
+            edges = new HashSet<>();
+        }
+    }
+
+    static class Node {
+        public int value;
+        public int in;
+        public int out;
+        public ArrayList<Node> nexts;
+        public ArrayList<Edge> edges;
+
+        public Node(int value) {
+            this.value = value;
+            in = 0;
+            out = 0;
+            nexts = new ArrayList<>();
+            edges = new ArrayList<>();
+        }
+    }
+
+    static class Edge {
+        public int weight;
+        public Node from;
+        public Node to;
+
+        public Edge(int weight, Node from, Node to) {
+            this.weight = weight;
+            this.from = from;
+            this.to = to;
+        }
+    }
+
+    public static int[] canFinish1(int numCourses, int[][] prerequisites) {
         if (numCourses > 0 && prerequisites.length == 0) return true;
 
         for (int[] prerequisite : prerequisites) {
@@ -42,7 +113,8 @@ public class CourseSchedule {
             }
         }
 
-        Set<Integer> result = new HashSet<>();
+//        Set<Integer> result = new HashSet<>();
+        Queue<Integer> result = new PriorityQueue<>();
         while (!zeroQueue.isEmpty()) {
             Integer courseId = zeroQueue.poll();
             result.add(courseId);
@@ -63,6 +135,13 @@ public class CourseSchedule {
             }
         }
 
-        return map.size() <= 0;
+        int[] array = new int[numCourses];
+        if (map.size() <= 0) {
+            for (int i = 0; i < result.size(); i++) {
+                array[i] = result.poll();
+            }
+        }
+
+        return array;
     }
 }
