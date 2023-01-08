@@ -12,7 +12,7 @@ import java.util.Map;
  * TODO
  */
 public class LongestSubstringWithoutRepeatingCharacters {
-    public static int lengthOfLongestSubstring(String s) {
+    public static int lengthOfLongestSubstring1(String s) {
         Map<Character, Integer> map = new HashMap<>();
         int start = 0, end = 0;
         boolean isInterrupted = false;
@@ -46,7 +46,23 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     public static void main(String[] args) {
 //        String s = "pwwkew";
-        String s = "nfpdmpi";
-        System.out.println(lengthOfLongestSubstring(s));
+        String s = "abcdcdafb";
+        lengthOfLongestSubstring(s);
+//        System.out.println();
     }
+
+    public static int lengthOfLongestSubstring(String s) {
+        boolean[] exist = new boolean[256];
+        int i = 0, maxLen = 0;
+        for (int j = 0; j < s.length(); j++) {
+            while (exist[s.charAt(j)]) {
+                exist[s.charAt(i)] = false;
+                i++;
+            }
+            exist[s.charAt(j)] = true;
+            maxLen = Math.max(j - i + 1, maxLen);
+        }
+        return maxLen;
+    }
+
 }

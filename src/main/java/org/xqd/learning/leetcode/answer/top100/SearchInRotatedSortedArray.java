@@ -77,4 +77,23 @@ public class SearchInRotatedSortedArray {
 
         return -1;
     }
+
+    public static int search(int[] nums, int target) {
+        int p = -1;
+
+        int start = 0;
+        int end = nums.length -1;
+
+        /**
+         * maybe need to compare the nums[middle] with target,
+         * and compare nums[start] or nums[end] with target
+         * not just using one condition like nums[middle]
+         */
+        while (start <= end) {
+            int middle = start + ((end - start) >> 1);
+//            if (nums[middle] )
+        }
+
+        return p;
+    }
 }
