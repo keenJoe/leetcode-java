@@ -87,11 +87,11 @@ public class CourseSchedule {
     }
 
     public static int[] canFinish1(int numCourses, int[][] prerequisites) {
-        if (numCourses > 0 && prerequisites.length == 0) return true;
-
-        for (int[] prerequisite : prerequisites) {
-            if (prerequisite[0] == prerequisite[1]) return false;
-        }
+//        if (numCourses > 0 && prerequisites.length == 0) return true;
+//
+//        for (int[] prerequisite : prerequisites) {
+//            if (prerequisite[0] == prerequisite[1]) return false;
+//        }
 
         //统计每个 prerequisite[0]的入度值
         Map<Integer, Integer> map = new HashMap<>();
