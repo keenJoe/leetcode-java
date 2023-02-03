@@ -1,0 +1,14 @@
+876
+第一次的解题思路就是使用快慢指针，但是自己没用对
+ public ListNode middleNode(ListNode head) {
+        ListNode s = head;
+        ListNode f = head;
+        while(f != null && f.next != null) {
+            f = f.next.next;
+            s = s.next;
+        }
+        return s;
+    }
+that is a beautiful answer.
+
+自己可以再尝试一下使用快慢指针，一定要掌握这个思想，类似找中值的题型都可以使用快慢指针完成。

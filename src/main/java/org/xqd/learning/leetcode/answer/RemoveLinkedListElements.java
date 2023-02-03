@@ -33,14 +33,11 @@ public class RemoveLinkedListElements {
         while (head != null) {
             if (head.val == val) {
                 pre.next = head.next;
-                //head = head.next;
+                head = head.next;
             } else {
                 pre = head;
-                //head = head.next;
+                head = head.next;
             }
-
-            //确实可以再精进一下！！！代码似乎好看了，但是比原来慢了1ms！！！
-            head = head.next;
         }
 
         return dummyNode.next;
