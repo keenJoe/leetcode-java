@@ -1,5 +1,7 @@
 package org.xqd.learning.leetcode.dp;
 
+import com.sun.media.sound.SoftTuning;
+
 import java.util.Arrays;
 
 /**
@@ -26,16 +28,12 @@ public class MinCostClimbingStairs {
     }
 
     public int process0(int[] cost) {
+        return 0;
+    }
+
+    public int process2(int[] cost) {
         int length = cost.length;
         int[][] array = new int[length + 1][length + 1];
-
-        for (int row = 0; row < length; row++) {
-            array[row][0] = 0;
-        }
-
-        for (int col = 0; col < length; col++) {
-            array[length][col] = 0;
-        }
 
         for (int col = 1; col < length + 1; col++) {
             array[length - 1][col] = cost[length - 1];
@@ -49,6 +47,24 @@ public class MinCostClimbingStairs {
                     b = array[row + 2][col - 2];
                 }
                 array[row][col] = cost[row] + Math.min(a, b);
+            }
+        }
+
+        return Math.min(array[0][cost.length], array[1][cost.length]);
+    }
+
+    public int process1(int[] cost) {
+        int length = cost.length;
+        int[][] array = new int[length + 1][length + 1];
+
+        for (int col = 1; col < length + 1; col++) {
+            array[length - 1][col] = cost[length - 1];
+        }
+
+        for (int row = length - 2; row >= 0; row--) {
+            int col = length - row;
+            for (; col < length + 1; col++) {
+                array[row][col] = cost[row] + Math.min(array[row + 1][col - 1], array[row + 2][col - 2]);
             }
         }
 
