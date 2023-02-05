@@ -7,21 +7,52 @@ import java.util.Arrays;
  */
 public class MinCostClimbingStairs {
     public static void main(String[] args) {
-//        int[] cost = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
-        int[] cost = {10, 15, 20};
+        int[] cost = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+//        int[] cost = {10, 15, 20};
+//        int[] cost = {1, 100};
         MinCostClimbingStairs minCostClimbingStairs = new MinCostClimbingStairs();
         int i = minCostClimbingStairs.minCostClimbingStairs(cost);
-        System.out.println("**********");
         System.out.println(i);
     }
 
     public int minCostClimbingStairs(int[] cost) {
         //int zero = fromIndexZero(cost, 0, cost.length);
         //int one = fromIndexOne(cost, 1, cost.length);
+        //int zero = dp0(cost);
+        //int one = dp1(cost);
+        //return Math.min(zero, one);
 
-        int zero = dp0(cost);
-        int one = dp1(cost);
-        return Math.min(zero, one);
+        return process0(cost);
+    }
+
+    public int process0(int[] cost) {
+        int length = cost.length;
+        int[][] array = new int[length + 1][length + 1];
+
+        for (int row = 0; row < length; row++) {
+            array[row][0] = 0;
+        }
+
+        for (int col = 0; col < length; col++) {
+            array[length][col] = 0;
+        }
+
+        for (int col = 1; col < length + 1; col++) {
+            array[length - 1][col] = cost[length - 1];
+        }
+
+        for (int col = 1; col < length + 1; col++) {
+            for (int row = 0; row < length - 1; row++) {
+                int a = array[row + 1][col - 1];
+                int b = 0;
+                if (col - 2 >= 0) {
+                    b = array[row + 2][col - 2];
+                }
+                array[row][col] = cost[row] + Math.min(a, b);
+            }
+        }
+
+        return Math.min(array[0][cost.length], array[1][cost.length]);
     }
 
     public int dp0(int[] cost) {
@@ -81,7 +112,11 @@ public class MinCostClimbingStairs {
     }
 
     public int fromIndexZero(int[] cost, int index, int rest) {
-        if (index >= cost.length) {
+//        if (index >= cost.length) {
+//            return 0;
+//        }
+
+        if (rest <= 0) {
             return 0;
         }
 
@@ -97,7 +132,10 @@ public class MinCostClimbingStairs {
     }
 
     public int fromIndexOne(int[] cost, int index, int rest) {
-        if (index >= cost.length) {
+//        if (index >= cost.length) {
+//            return 0;
+//        }
+        if (rest <= 0) {
             return 0;
         }
 
