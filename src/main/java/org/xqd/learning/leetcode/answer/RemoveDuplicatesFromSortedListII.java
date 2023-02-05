@@ -1,6 +1,7 @@
 package org.xqd.learning.leetcode.answer;
 
 import org.xqd.learning.leetcode.pojo.ListNode;
+import org.xqd.learning.leetcode.pojo.TreeNode;
 
 /**
  * @author XuQidong
@@ -9,12 +10,12 @@ import org.xqd.learning.leetcode.pojo.ListNode;
 public class RemoveDuplicatesFromSortedListII {
 
     public static void main(String[] args) throws InterruptedException {
-//        ListNode node6 = new ListNode(5, null);
-//        ListNode node5 = new ListNode(4, node6);
-//        ListNode node4 = new ListNode(3, node5);
-//        ListNode node3 = new ListNode(2, node4);
-//        ListNode node2 = new ListNode(2, node3);
-        ListNode node1 = new ListNode(1, null);
+        ListNode node6 = new ListNode(5, null);
+        ListNode node5 = new ListNode(4, node6);
+        ListNode node4 = new ListNode(4, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(3, node3);
+        ListNode node1 = new ListNode(2, node2);
         ListNode head = new ListNode(1, node1);
 
         RemoveDuplicatesFromSortedListII removeDuplicatesFromSortedListII = new RemoveDuplicatesFromSortedListII();
@@ -26,7 +27,7 @@ public class RemoveDuplicatesFromSortedListII {
         }
     }
 
-    public ListNode deleteDuplicates(ListNode head) {
+    public ListNode deleteDuplicates1(ListNode head) {
         ListNode dummyNode = new ListNode(0);
         ListNode pre = dummyNode;
         pre.next = head;
@@ -36,18 +37,10 @@ public class RemoveDuplicatesFromSortedListII {
 
         while(curr != null && after != null){
             if(curr.val == after.val){
-                System.out.println("相等");
-                System.out.println("pre: " + pre.val);
-                System.out.println("curr: " + curr.val);
-                System.out.println("after: " + after.val);
                 curr = curr.next;
                 after = after.next;
                 isCycle = true;
             } else {
-                System.out.println("不相等");
-                System.out.println("pre: " + pre.val);
-                System.out.println("curr: " + curr.val);
-                System.out.println("after: " + after.val);
                 if(isCycle){
                     pre.next = after;
                     isCycle = false;
@@ -58,13 +51,31 @@ public class RemoveDuplicatesFromSortedListII {
                 curr = curr.next;
                 after = after.next;
             }
-
-            System.out.println("*********");
         }
+
         if(curr != null && !isCycle){
             pre.next = curr;
         } else {
             pre.next = null;
+        }
+
+        return dummyNode.next;
+    }
+
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null) return head;
+        ListNode dummyNode = new ListNode(0);
+        ListNode pre = dummyNode;
+        pre.next = head;
+        boolean isEquals = false;
+
+        while(head != null && head.next != null){
+            if(head.val == head.next.val){
+                head = head.next;
+                isEquals = true;
+            } else {
+
+            }
         }
 
         return dummyNode.next;
