@@ -1,9 +1,5 @@
 package org.xqd.learning.leetcode.dp;
 
-import com.sun.media.sound.SoftTuning;
-
-import java.util.Arrays;
-
 /**
  * 746. Min Cost Climbing Stairs
  */
