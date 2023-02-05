@@ -15,15 +15,30 @@ public class BestTimeToBuyAndSellStock {
 
     public int maxProfit(int[] prices) {
         int length = prices.length;
-        int[] array = new int[length + 1];
-        for (int i = 0; i < length; i++) {
-            array[i] = process(prices, i, i);
-        }
-
-        return Arrays.stream(array).max().getAsInt();
+//        int[] array = new int[length + 1];
+//        for (int i = 0; i < length; i++) {
+//            int bIndex = i;
+//            array[i] = process(prices, bIndex, length - 1);
+//        }
+//
+//        return Arrays.stream(array).max().getAsInt();
+        return process(prices, 0, length - 1);
     }
 
+
     public int process(int[] prices, int bIndex, int sIndex) {
+        if (bIndex == sIndex) {
+            return 0;
+        }
+
+        int profit = prices[sIndex] - prices[bIndex];
+
+        int p1 = Math.max(process(prices, bIndex, sIndex - 1), profit);
+        int p2 = Math.max(process(prices, bIndex + 1, sIndex), p1);
+        return p2;
+    }
+
+    public int process1(int[] prices, int bIndex, int sIndex) {
         int buy = prices[bIndex];
 
         int sell = prices[sIndex];
