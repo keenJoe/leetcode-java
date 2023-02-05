@@ -28,7 +28,16 @@ public class MinCostClimbingStairs {
     }
 
     public int process0(int[] cost) {
-        return 0;
+        int length = cost.length;
+        int[] array = new int[length];
+
+        array[0] = cost[0];
+        array[1] = cost[1];
+
+        for (int i = 2; i < length; i++) {
+            array[i] = cost[i] + Math.min(array[i - 1], array[i - 2]);
+        }
+        return Math.min(array[length - 1], array[length - 2]);
     }
 
     public int process2(int[] cost) {
