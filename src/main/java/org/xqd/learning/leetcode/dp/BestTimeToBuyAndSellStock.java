@@ -14,27 +14,51 @@ public class BestTimeToBuyAndSellStock {
     }
 
     public int maxProfit(int[] prices) {
+        int maxProfit = 0;
+        int buy = prices[0];
+
+        for(int i = 1;i < prices.length;i++){
+            if(prices[i] < buy) {
+                buy = prices[i];
+            }
+
+            int temp = prices[i] - buy;
+            if (temp > maxProfit) {
+                maxProfit = temp;
+            }
+        }
+
+        return maxProfit;
+    }
+
+    public int process(int[] prices) {
         int length = prices.length;
-//        int[] array = new int[length + 1];
-//        for (int i = 0; i < length; i++) {
-//            int bIndex = i;
-//            array[i] = process(prices, bIndex, length - 1);
-//        }
-//
-//        return Arrays.stream(array).max().getAsInt();
-        return process(prices, 0, length - 1);
+        int[][] array = new int[length][length];
+
+        for (int sellIndex = 1; sellIndex < length; sellIndex++) {
+            int col = sellIndex;
+            for (int row = 0; row < length - sellIndex; row++) {
+                int p1 = Math.max(array[row][col - 1], array[row + 1][col]);
+                int p2 = Math.max(p1, prices[col] - prices[row]);
+                array[row][col] = p2;
+
+                col += 1;
+            }
+        }
+
+        return array[0][prices.length - 1];
     }
 
 
-    public int process(int[] prices, int bIndex, int sIndex) {
-        if (bIndex == sIndex) {
+    public int process2(int[] prices, int bIndex, int sIndex) {
+        if (bIndex == prices.length || sIndex == prices.length) {
             return 0;
         }
 
         int profit = prices[sIndex] - prices[bIndex];
 
-        int p1 = Math.max(process(prices, bIndex, sIndex - 1), profit);
-        int p2 = Math.max(process(prices, bIndex + 1, sIndex), p1);
+        int p1 = Math.max(process2(prices, bIndex, sIndex - 1), profit);
+        int p2 = Math.max(process2(prices, bIndex + 1, sIndex), p1);
         return p2;
     }
 
