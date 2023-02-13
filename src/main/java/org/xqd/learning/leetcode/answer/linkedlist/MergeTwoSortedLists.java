@@ -46,17 +46,20 @@ public class MergeTwoSortedLists {
             head = head.next;
         }
 
-        while (head1 != null) {
-            head.next = head1;
-            head = head.next;
-            head1 = head1.next;
-        }
+//        while (head1 != null) {
+//            head.next = head1;
+//            head = head.next;
+//            head1 = head1.next;
+//        }
+//
+//        while (head2 != null) {
+//            head.next = head2;
+//            head = head.next;
+//            head2 = head2.next;
+//        }
 
-        while (head2 != null) {
-            head.next = head2;
-            head = head.next;
-            head2 = head2.next;
-        }
+        if (head1 != null) head.next = head1;
+        if (head2 != null) head.next = head2;
 
         return dummyNode.next;
     }
