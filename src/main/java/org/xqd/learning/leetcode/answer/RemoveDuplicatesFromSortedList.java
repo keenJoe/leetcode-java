@@ -2,86 +2,53 @@ package org.xqd.learning.leetcode.answer;
 
 import org.xqd.learning.leetcode.pojo.ListNode;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.prefs.PreferenceChangeEvent;
 
 /**
  * @author XuQidong
  * @date 2021/6/8 19:06
+ *
+ * 83. Remove Duplicates from Sorted List
  */
 public class RemoveDuplicatesFromSortedList {
 
-    public static void main(String[] args) throws InterruptedException {
-        ListNode node6 = new ListNode(7, null);
-        ListNode node5 = new ListNode(5, node6);
-        ListNode node4 = new ListNode(5, node5);
-        ListNode node3 = new ListNode(3, node4);
-        ListNode node2 = new ListNode(1, node3);
-        ListNode node1 = new ListNode(1, node2);
-        ListNode head = new ListNode(1, node1);
+    /**
+     * 链表删除问题，一定要保留当前节点的前一个节点
+     * 链表删除重复节点问题一定要确认后续节点没有重复元素再移动当前的节点。 ​​​
+     */
+    public static ListNode deleteDuplicates(ListNode head) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
 
-        ListNode node = deleteDuplicates(head);
-        while(node != null){
-            System.out.println(node.val);
-            node = node.next;
-            Thread.sleep(1000);
-        }
-    }
+        ListNode preNode = head;
 
-    public static ListNode deleteDuplicates1(ListNode head) {
-        Set<Integer> set = new HashSet<>();
+        //忘记了判空
+        while (head != null && head.next != null) {
+            ListNode curNode = head.next;
 
-        ListNode dummyHead = new ListNode(0);
-        ListNode p = head;
-        ListNode pre = null;
-        dummyHead.next = p;
-
-        while (p != null) {
-            boolean contains = set.contains(p.val);
-            System.out.println(contains);
-            if (contains) {
-                if (p.next != null) {
-                    ListNode temp = p;
-                    pre.next = p.next;
-                    p = temp.next;
-                } else {
-                    //p = p.next;
-                    System.out.println(pre.val);
-                    System.out.println(p.val);
-                    System.out.println(p.next);
-                    //pre.next = p.next;
-                    p = p.next;
-                    pre.next = p;
-                }
-            } else {
-                set.add(p.val);
-                pre = p;
-                p = p.next;
+            //忘记了判空
+            while (curNode != null && curNode.val == preNode.val) {
+                curNode = curNode.next;
             }
 
-            System.out.println("********");
+            preNode.next = curNode;
+            preNode = curNode;
+            head = curNode;
         }
 
-        return dummyHead.next;
+        return dummy.next;
     }
 
-    public static ListNode deleteDuplicates(ListNode head) {
-        if(head == null) return head;
-        //ListNode dummyNode = new ListNode(0);
+    public static ListNode deleteDuplicates2(ListNode head) {
+        if (head == null) return head;
         ListNode dummyNode = head;
-//        ListNode pre = dummyNode;
-//        pre.next = head;
-        //ListNode cur = head.next;
-        //dummyNode.next = head;
 
-        while(head != null && head.next != null){
-            if(head.val == head.next.val){
+        while (head != null && head.next != null) {
+            if (head.val == head.next.val) {
                 head.next = head.next.next;
-                //cur = cur.next;
             } else {
                 head = head.next;
-                //cur = head.next;
             }
         }
 
