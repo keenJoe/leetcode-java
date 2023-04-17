@@ -6,6 +6,8 @@ import org.xqd.learning.leetcode.pojo.TreeNode;
 /**
  * @author XuQidong
  * @date 2021/6/11 19:31
+ *
+ * 82. Remove Duplicates from Sorted List II
  */
 public class RemoveDuplicatesFromSortedListII {
 
@@ -27,12 +29,39 @@ public class RemoveDuplicatesFromSortedListII {
         }
     }
 
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode preNode = new ListNode();
+        preNode.next = head;
+
+        while (head != null) {
+            ListNode next = head.next;
+            if (next != null) {
+                if (head.val == next.val) {
+
+                } else {
+
+                }
+            }
+        }
+
+        return preNode.next;
+    }
+
+
+
+
+
+
+
+
+
+
     public ListNode deleteDuplicates1(ListNode head) {
         ListNode dummyNode = new ListNode(0);
         ListNode pre = dummyNode;
         pre.next = head;
         ListNode curr = head;
-        ListNode after = head.next;
+        ListNode after = head != null ? head.next : null;
         boolean isCycle = false;
 
         while(curr != null && after != null){
@@ -57,25 +86,6 @@ public class RemoveDuplicatesFromSortedListII {
             pre.next = curr;
         } else {
             pre.next = null;
-        }
-
-        return dummyNode.next;
-    }
-
-    public ListNode deleteDuplicates(ListNode head) {
-        if(head == null) return head;
-        ListNode dummyNode = new ListNode(0);
-        ListNode pre = dummyNode;
-        pre.next = head;
-        boolean isEquals = false;
-
-        while(head != null && head.next != null){
-            if(head.val == head.next.val){
-                head = head.next;
-                isEquals = true;
-            } else {
-
-            }
         }
 
         return dummyNode.next;
