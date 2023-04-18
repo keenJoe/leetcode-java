@@ -18,7 +18,11 @@ public class BinaryTreeInorderTraversal {
         List<Integer> list = new ArrayList<>();
         if (root == null) return list;
 
-        if (root.left != null) {
+//        if (root.left != null) {
+//            list.addAll(inorderTraversal(root.left));
+//        }
+
+        if (root != null) {
             list.addAll(inorderTraversal(root.left));
         }
 
