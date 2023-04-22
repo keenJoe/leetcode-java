@@ -4,6 +4,7 @@ import org.xqd.learning.leetcode.pojo.TreeNode;
 
 /**
  * 101. Symmetric Tree
+ * @author qidongxu
  */
 public class SymmetricTree {
     public boolean isSymmetric(TreeNode root) {

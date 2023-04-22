@@ -6,6 +6,7 @@ import java.util.Stack;
 
 /**
  * 100. Same Tree
+ * @author qidongxu
  */
 public class SameTree {
     /**
