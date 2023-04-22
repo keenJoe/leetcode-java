@@ -1,2 +1,9 @@
-package org.xqd.learning.leetcode.tree;public class ConvertSortedArray2BinarySearchTree {
+package org.xqd.learning.leetcode.tree;
+
+/**
+ * @author qidongxu
+ */
+public class ConvertSortedArray2BinarySearchTree {
+
+
 }
