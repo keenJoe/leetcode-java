@@ -50,4 +50,6 @@ public class BinaryTreeInorderTraversal {
 
         return list;
     }
+
+    //使用线索化二叉树的方法
 }

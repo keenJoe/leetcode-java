@@ -1,7 +1,6 @@
 package org.xqd.learning.leetcode.tree;
 
-
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp;
+import org.xqd.learning.leetcode.pojo.ListNode;
 import org.xqd.learning.leetcode.pojo.TreeNode;
 
 import java.util.*;
@@ -26,50 +25,82 @@ public class PathSum {
 //
 //        head.right.right.right = new TreeNode(1);
 
-        TreeNode head = new TreeNode(1);
-        head.left = new TreeNode(2);
+//        TreeNode head = new TreeNode(1);
+//        head.left = new TreeNode(2);
 //        head.right = new TreeNode(3);
 
-        boolean b = hasPathSum(head, 5);
+        TreeNode head = new TreeNode(1);
+        head.right = new TreeNode(2);
+        head.right.right = new TreeNode(3);
+        head.right.right.right = new TreeNode(4);
+        head.right.right.right.right = new TreeNode(5);
+
+        boolean b = hasPathSum(head, 3);
         System.out.println(b);
     }
 
     public static boolean hasPathSum(TreeNode root, int targetSum) {
-        Deque<Integer> deque = new LinkedList<>();
-        Stack<TreeNode> stack = new Stack<>();
-
-//        Set<TreeNode> set = new HashSet<>();
 //        while (root != null || !stack.isEmpty()) {
+//            System.out.println("当前栈: " + stack);
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//
 //            while (root != null) {
-//                deque.addFirst(root.val);
 //                stack.add(root);
+//                sum += root.val;
 //                root = root.left;
 //            }
 //
-//            int sum = deque.stream().mapToInt(i -> i).sum();
-//            System.out.println("当前和：" + sum);
-//            System.out.println("当前的栈元素：" + stack);
+//            System.out.println("总和" + sum);
 //
-//            if (sum == targetSum) {
-//                return true;
-//            }
-//
+//            //如果这个节点不是叶子节点，那么不行
 //            root = stack.peek();
-//            if (root.right == null) {
-//                deque.removeFirst();
+//            if (pre != null && pre == root) {
+//                sum -= pre.val;
 //                stack.pop();
 //                root = stack.peek();
+//            }
 //
-//                if (set.contains(root)) {
-//                    return false;
+//            if (root.left == null && root.right == null) {
+////                sum += root.val;
+//                if (sum == targetSum) {
+//                    return true;
+//                } else {
+//                    sum -= root.val;
+//                    root = stack.pop();
 //                }
-//
-//                set.add(root);
+//            } else {
+//                if (root.left != null && root.right != null) {
+//                    pre = root;
+//                }
 //            }
 //
 //            root = root.right;
 //        }
 
+        Stack<TreeNode> stack = new Stack<>();
+        int sum = 0;
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            sum += pop.val;
+            if (pop.left == null && pop.right == null) {
+                if (targetSum == sum) {
+                    return true;
+                }
+            }
+
+            if (pop.right != null) {
+                stack.push(pop.right);
+            }
+
+            if (pop.left != null) {
+                stack.push(pop.left);
+            }
+        }
 
         return false;
     }
