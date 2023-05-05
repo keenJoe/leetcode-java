@@ -4,7 +4,6 @@ import org.xqd.learning.leetcode.pojo.ListNode;
 
 /**
  * @author XuQidong
- *
  * 203. Remove Linked List Elements
  */
 public class RemoveLinkedListElements {
