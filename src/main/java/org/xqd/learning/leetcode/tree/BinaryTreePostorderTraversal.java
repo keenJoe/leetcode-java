@@ -6,6 +6,7 @@ import java.util.*;
 
 /**
  * 145. Binary Tree Postorder Traversal
+ *
  * @author qidongxu
  */
 public class BinaryTreePostorderTraversal {
@@ -35,6 +36,35 @@ public class BinaryTreePostorderTraversal {
                 TreeNode node = stack.pop();
                 list.add(node.val);
                 set.add(node);
+            }
+        }
+
+        return list;
+    }
+
+    public static List<Integer> postorderTraversal1(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.peek();
+
+            if (cur.right != null) {
+                stack.add(cur.right);
+                cur.right = null;
+            }
+
+            if (cur.left != null) {
+                stack.add(cur.left);
+                cur.left = null;
+            }
+
+            if (cur.left == null && cur.right == null) {
+                list.add(stack.pop().val);
             }
         }
 
