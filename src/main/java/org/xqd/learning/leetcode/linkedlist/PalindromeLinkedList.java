@@ -14,27 +14,32 @@ public class PalindromeLinkedList {
         int length = calLengthOfLinkedList(head);
         if (length <= 1) return true;
 
-        int index = 0;
+        int index = 1;
         int mid = length / 2;
         int remainder = length % 2;
 
         Map<Integer, Integer> table = new HashMap<>();
         while (head != null) {
-            if (remainder == 0 && index >= mid) {
-                Integer key = table.get(length - index);
-                if (key != null) {
-                    if (key != head.val) return false;
-                } else {
-                    return false;
+            if (remainder == 0) {
+                if (index > mid) {
+                    System.out.println(index + "---" + mid);
+                    Integer key = table.get(length - index + 1);
+                    if (key != null) {
+                        if (key != head.val) return false;
+                    } else {
+                        return false;
+                    }
                 }
-            } else if (index > mid){
-                Integer key = table.get(length - index);
-                if (key != null) {
-                    if (key != head.val) return false;
-                } else {
-                    return false;
+            } else {
+                if (index > mid + 1) {
+                    System.out.println(index + "---" + mid);
+                    Integer key = table.get(length - index + 1);
+                    if (key != null) {
+                        if (key != head.val) return false;
+                    } else {
+                        return false;
+                    }
                 }
-
             }
 
             table.put(index, head.val);
