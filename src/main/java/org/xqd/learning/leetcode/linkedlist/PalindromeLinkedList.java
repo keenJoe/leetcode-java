@@ -13,6 +13,35 @@ public class PalindromeLinkedList {
     public boolean isPalindrome(ListNode head) {
         int length = calLengthOfLinkedList(head);
         if (length <= 1) return true;
+        char[] chars = convertLinkedList2Str(head).toCharArray();
+        int L = 0;
+        int R = chars.length - 1;
+
+        while (L <= R) {
+            if (chars[L] != chars[R]) {
+                return false;
+            }
+
+            L++;
+            R--;
+        }
+
+        return true;
+    }
+
+    public String convertLinkedList2Str(ListNode head) {
+        StringBuilder builder = new StringBuilder();
+        while (head != null) {
+            builder.append(head.val);
+            head = head.next;
+        }
+
+        return builder.toString();
+    }
+
+    public boolean isPalindrome1(ListNode head) {
+        int length = calLengthOfLinkedList(head);
+        if (length <= 1) return true;
 
         int index = 1;
         int mid = length / 2;
