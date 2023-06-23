@@ -10,45 +10,62 @@ public class RemoveDuplicatesFromSortedListII {
         ListNode dummy = new ListNode();
         dummy.next = head;
 
-        if (head == null || head.next == null) {
-            return head;
-        }
+//        if (head == null || head.next == null) {
+//            return head;
+//        }
+//
+//        ListNode cur = head.next;
+//        ListNode pre = null;
+//        ListNode firstDuplicatedNode = null;
+//
+//        while (cur != null) {
+//            //如果head和cur不重复，
+//            if (head != cur) {
+//                if (firstDuplicatedNode != null) {
+//                    if (pre == null) {
+//                        dummy.next = cur;
+//                    } else {
+//                        pre.next = cur;
+//                    }
+//
+//                    firstDuplicatedNode = null;
+//                } else {
+//                    pre = head;
+//                }
+//            } else {
+//                //如果head和cur重复
+//                if (firstDuplicatedNode == null) {
+//                    firstDuplicatedNode = head;
+//                }
+//            }
+//
+//            head = cur;
+//            cur = cur.next;
+//        }
+//
+//        if (firstDuplicatedNode != null && cur == null) {
+//            if (pre == null) {
+//                dummy.next = cur;
+//            } else {
+//                pre.next = cur;
+//            }
+//        }
 
-        ListNode cur = head.next;
-        ListNode pre = null;
-        ListNode firstDuplicatedNode = null;
+        ListNode cur = head;
+        ListNode pre = dummy;
 
         while (cur != null) {
-            //如果head和cur不重复，
-            if (head != cur) {
-                if (firstDuplicatedNode != null) {
-                    if (pre == null) {
-                        dummy.next = cur;
-                    } else {
-                        pre.next = cur;
-                    }
+            if (cur.next != null && cur.val == cur.next.val) {
+                while (cur.next != null && cur.val == cur.next.val) {
+                    cur = cur.next;
+                }
 
-                    firstDuplicatedNode = null;
-                } else {
-                    pre = head;
-                }
+                pre.next = cur.next;
             } else {
-                //如果head和cur重复
-                if (firstDuplicatedNode == null) {
-                    firstDuplicatedNode = head;
-                }
+                pre = pre.next;
             }
 
-            head = cur;
             cur = cur.next;
-        }
-
-        if (firstDuplicatedNode != null && cur == null) {
-            if (pre == null) {
-                dummy.next = cur;
-            } else {
-                pre.next = cur;
-            }
         }
 
         return dummy.next;
