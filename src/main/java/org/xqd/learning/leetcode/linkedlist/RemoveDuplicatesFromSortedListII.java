@@ -16,11 +16,26 @@ public class RemoveDuplicatesFromSortedListII {
 
         ListNode cur = head.next;
         ListNode pre = null;
+        ListNode firstDuplicatedNode = null;
 
         while (cur != null) {
+            //如果head和cur不重复，
             if (head != cur) {
-                if (pre == null) {
+                if (firstDuplicatedNode != null) {
+                    if (pre == null) {
+                        dummy.next = cur;
+                    } else {
+                        pre.next = cur;
+                    }
 
+                    firstDuplicatedNode = null;
+                } else {
+                    pre = head;
+                }
+            } else {
+                //如果head和cur重复
+                if (firstDuplicatedNode == null) {
+                    firstDuplicatedNode = head;
                 }
             }
 
@@ -28,6 +43,14 @@ public class RemoveDuplicatesFromSortedListII {
             cur = cur.next;
         }
 
-        return null;
+        if (firstDuplicatedNode != null && cur == null) {
+            if (pre == null) {
+                dummy.next = cur;
+            } else {
+                pre.next = cur;
+            }
+        }
+
+        return dummy.next;
     }
 }
