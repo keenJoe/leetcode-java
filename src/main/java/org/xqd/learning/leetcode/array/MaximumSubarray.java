@@ -9,6 +9,10 @@ public class MaximumSubarray {
     }
 
     public int process(int[] nums, int start, int end) {
+        if (start == end) {
+            return nums[start];
+        }
+
         int r1 = 0;
         if (start + 1 < end) {
             r1= process(nums, start + 1, end);
