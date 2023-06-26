@@ -9,6 +9,29 @@ import org.xqd.learning.leetcode.pojo.ListNode;
  **/
 public class MiddleOfTheLinkedList {
     public ListNode middleNode(ListNode head) {
-        return null;
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        if (head.next.next == null) {
+            return head.next;
+        }
+
+        ListNode mid = head;
+        ListNode fast = head;
+
+        while (mid != null && fast != null) {
+            if (fast.next != null && fast.next.next != null) {
+                fast = fast.next.next;
+            } else {
+                fast = fast.next;
+            }
+
+            if (fast != null) {
+                mid = mid.next;
+            }
+        }
+
+        return mid;
     }
 }
