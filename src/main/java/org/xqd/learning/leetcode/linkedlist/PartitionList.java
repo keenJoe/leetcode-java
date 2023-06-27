@@ -2,6 +2,8 @@ package org.xqd.learning.leetcode.linkedlist;
 
 import org.xqd.learning.leetcode.pojo.ListNode;
 
+import java.util.ArrayDeque;
+
 /**
  * 86. Partition List
  */
@@ -9,6 +11,7 @@ public class PartitionList {
     /**
      * 基于partition1，ChatGPT给出的优化方案
      * 使用链表模拟两个队列，然后再将队列串联
+     *
      * @param head
      * @param x
      * @return
@@ -83,6 +86,39 @@ public class PartitionList {
             }
         }
 
+        return dummy.next;
+    }
+
+    public ListNode partition2(ListNode head, int x) {
+        ArrayDeque<ListNode> lessQueue = new ArrayDeque<>();
+        ArrayDeque<ListNode> greaterQueue = new ArrayDeque<>();
+
+        while (head != null) {
+            if (head.val >= x) {
+                greaterQueue.add(head);
+            } else {
+                lessQueue.add(head);
+            }
+
+            head = head.next;
+        }
+
+        ListNode dummy = new ListNode();
+        ListNode tempHead = new ListNode();
+        dummy = tempHead;
+
+        while (!lessQueue.isEmpty()) {
+            tempHead.next = lessQueue.poll();
+            tempHead = tempHead.next;
+        }
+
+        while (!greaterQueue.isEmpty()) {
+            tempHead.next = greaterQueue.poll();
+            tempHead = tempHead.next;
+        }
+
+        //如果没有这一步，会形成一个cycle
+        tempHead.next = null;
         return dummy.next;
     }
 }
