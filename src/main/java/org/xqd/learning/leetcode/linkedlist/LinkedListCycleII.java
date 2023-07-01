@@ -30,8 +30,8 @@ public class LinkedListCycleII {
 
                 return slow;
             }
-
-            return null;
         }
+
+        return null;
     }
 }
