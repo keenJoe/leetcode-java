@@ -70,4 +70,37 @@ public class RemoveDuplicatesFromSortedListII {
 
         return dummy.next;
     }
+
+    /**
+     * 思路大致相同，但是这个方法会更简单一些
+     * @param head
+     * @return
+     */
+    public ListNode deleteDuplicates1(ListNode head) {
+        //use two pointers, slow - track the node before the dup nodes,
+        // fast - to find the last node of dups.
+        ListNode dummy = new ListNode(0), fast = head, slow = dummy;
+        slow.next = fast;
+        while (fast != null) {
+
+            //while loop to find the last node of the dups.
+            while (fast.next != null && fast.val == fast.next.val) {
+                fast = fast.next;
+            }
+
+            //duplicates detected.
+            if (slow.next != fast) {
+                //remove the dups.
+                slow.next = fast.next;
+                //reposition the fast pointer.
+                fast = slow.next;
+            } else {
+                //no dup, move down both pointer.
+                slow = slow.next;
+                fast = fast.next;
+            }
+        }
+
+        return dummy.next;
+    }
 }

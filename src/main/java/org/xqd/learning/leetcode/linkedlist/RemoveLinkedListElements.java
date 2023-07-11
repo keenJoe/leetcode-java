@@ -15,13 +15,22 @@ public class RemoveLinkedListElements {
         while (head != null) {
             if (head.val == val) {
                 pre.next = head.next;
-                head = head.next;
             } else {
                 pre = head;
-                head = head.next;
             }
+
+            head = head.next;
         }
 
         return dummyNode.next;
+    }
+
+    /**
+     * 递归版本
+     */
+    public ListNode removeElements1(ListNode head, int val) {
+        if (head == null) return null;
+        head.next = removeElements1(head.next, val);
+        return head.val == val ? head.next : head;
     }
 }

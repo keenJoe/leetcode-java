@@ -2,6 +2,8 @@ package org.xqd.learning.leetcode.answer.linkedlist;
 
 import org.xqd.learning.leetcode.pojo.ListNode;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -12,20 +14,24 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class ReorderList {
 
     public static void main(String[] args) throws InterruptedException {
-        ListNode node8 = new ListNode(8, null);
-        ListNode node7 = new ListNode(7, node8);
-        ListNode node6 = new ListNode(6, node7);
-        ListNode node5 = new ListNode(5, node6);
-        ListNode node4 = new ListNode(4, node5);
-        ListNode node3 = new ListNode(3, node4);
-        ListNode node2 = new ListNode(2, node3);
-        ListNode head1 = new ListNode(1, node2);
-
-        reorderList(head1);
-        while (head1 != null) {
-            System.out.println(head1.val);
-            head1 = head1.next;
-        }
+//        ListNode node8 = new ListNode(8, null);
+//        ListNode node7 = new ListNode(7, node8);
+//        ListNode node6 = new ListNode(6, node7);
+//        ListNode node5 = new ListNode(5, node6);
+//        ListNode node4 = new ListNode(4, node5);
+//        ListNode node3 = new ListNode(3, node4);
+//        ListNode node2 = new ListNode(2, node3);
+//        ListNode head1 = new ListNode(1, node2);
+//
+//        reorderList(head1);
+//        while (head1 != null) {
+//            System.out.println(head1.val);
+//            head1 = head1.next;
+//        }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        String format = sdf.format(new Date());
+        boolean equals = format.equals("03");
+        System.out.println(equals);
     }
 
     /**
@@ -77,17 +83,17 @@ public class ReorderList {
      * 快慢指针思想
      */
     public void reorderList3(ListNode head) {
-        if(head == null || head.next == null) return;
+        if (head == null || head.next == null) return;
 
         ListNode fast = head, slow = head;
-        while(fast.next != null && fast.next.next != null){
+        while (fast.next != null && fast.next.next != null) {
             fast = fast.next.next;
             slow = slow.next;
         }//slow is preMid
 
         ListNode preMid = slow;
         ListNode cur = slow.next;//cur is mid
-        while(cur.next != null){
+        while (cur.next != null) {
             ListNode next = cur.next;
             cur.next = next.next;
             next.next = preMid.next;
@@ -97,7 +103,7 @@ public class ReorderList {
         ListNode p1 = head;
         ListNode p2 = preMid.next;
 
-        while(p1 != preMid){
+        while (p1 != preMid) {
             preMid.next = p2.next;
             p2.next = p1.next;
             p1.next = p2;
