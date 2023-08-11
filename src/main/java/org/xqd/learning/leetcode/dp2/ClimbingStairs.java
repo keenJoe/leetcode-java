@@ -1,6 +1,30 @@
 package org.xqd.learning.leetcode.dp2;
 
 public class ClimbingStairs {
+
+    /**
+     * To calculate the new value we only leverage the previous two values.
+     * So we don't need to use an array to store all the previous values.
+     * @param n
+     * @return
+     */
+    public int climbStairs0(int n) {
+        if (n <= 1) {
+            return 1;
+        }
+
+        int prev1 = 1;
+        int prev2 = 2;
+
+        for (int i = 3; i <= n; i++) {
+            int newValue = prev1 + prev2;
+            prev1 = prev2;
+            prev2 = newValue;
+        }
+
+        return prev2;
+    }
+
     int climbStairs(int n) {
         if (n == 0) return 0;
         int rest[] = new int[n + 1];
