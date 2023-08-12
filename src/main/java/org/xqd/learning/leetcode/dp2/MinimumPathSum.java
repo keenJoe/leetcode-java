@@ -8,6 +8,28 @@ public class MinimumPathSum {
     public int minPathSum(int[][] grid) {
         int row = grid.length;
         int column = grid[0].length;
+
+        int[] array = new int[column];
+        array[0] = grid[0][0];
+
+        for (int i = 1; i < column; i++) {
+            array[i] = array[i - 1] + grid[0][i];
+        }
+
+        for (int i = 1; i < row; i++) {
+            array[0] += grid[i][0];
+            for (int j = 1; j < column; j++) {
+                array[j] = Math.min(array[j - 1], array[j]) + grid[i][j];
+            }
+        }
+
+        return array[column - 1];
+    }
+
+
+    public int minPathSum2(int[][] grid) {
+        int row = grid.length;
+        int column = grid[0].length;
         int[][] array = new int[row + 1][column + 1];
         for (int i = 0; i < row + 1; i++) {
             array[i][column] = Integer.MAX_VALUE;
