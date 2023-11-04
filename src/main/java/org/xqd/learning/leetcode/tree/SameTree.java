@@ -76,7 +76,7 @@ public class SameTree {
      * @return
      */
     public boolean isSameTreeUsingDepth(TreeNode p, TreeNode q) {
-
+        return false;
     }
 
     public boolean isSameTree2(TreeNode p, TreeNode q) {
@@ -98,7 +98,7 @@ public class SameTree {
             return false;
         }
 
-        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        return isSameTree1(p.left, q.left) && isSameTree1(p.right, q.right);
     }
 
     public boolean r(TreeNode p, TreeNode q) {
