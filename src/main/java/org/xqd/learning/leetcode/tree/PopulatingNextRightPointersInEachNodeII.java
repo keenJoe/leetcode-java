@@ -1,4 +1,4 @@
-package org.xqd.learning.leetcode.linkedlist;
+package org.xqd.learning.leetcode.tree;
 
 import org.xqd.learning.leetcode.graph.CourseScheduleII;
 import org.xqd.learning.leetcode.pojo.Node;
