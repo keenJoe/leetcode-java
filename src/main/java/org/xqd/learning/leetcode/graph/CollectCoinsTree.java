@@ -20,7 +20,8 @@ public class CollectCoinsTree {
             int from = edges[i][0];
             int to = edges[i][1];
 
-
         }
+
+        return 0;
     }
 }

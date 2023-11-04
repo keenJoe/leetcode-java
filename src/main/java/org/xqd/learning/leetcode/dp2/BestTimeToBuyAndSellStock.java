@@ -1,6 +1,4 @@
-package org.xqd.learning.leetcode.dp;
-
-import java.util.Arrays;
+package org.xqd.learning.leetcode.dp2;
 
 /**
  * 121. Best Time to Buy and Sell Stock
@@ -14,11 +12,15 @@ public class BestTimeToBuyAndSellStock {
     }
 
     public int maxProfit(int[] prices) {
+        return 0;
+    }
+
+    public int maxProfit1(int[] prices) {
         int maxProfit = 0;
         int buy = prices[0];
 
-        for(int i = 1;i < prices.length;i++){
-            if(prices[i] < buy) {
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < buy) {
                 buy = prices[i];
             }
 
