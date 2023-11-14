@@ -16,7 +16,7 @@ public class BinaryTreeInorderTraversal {
      * 二叉树的中序遍历
      * 非递归的方法
      */
-    public static List<Integer> inorderTraversal(TreeNode root) {
+    public static List<Integer> inorderTraversal1(TreeNode root) {
 //        List<Integer> list = new ArrayList<>();
 //        if (root == null) return list;
 //
@@ -52,4 +52,42 @@ public class BinaryTreeInorderTraversal {
     }
 
     //使用线索化二叉树的方法
+
+    /**
+     * 如果一个节点可能来到两次，那么第二次来到该节点的时候再将其加入到list中
+     * 如果一个节点只会到达一次，那么第一次就将其加入到list中
+     * @param root
+     * @return
+     */
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        while (root != null) {
+            TreeNode mostRight = root.left;
+            if (mostRight != null) {
+                //找当前节点的左子树的最右节点
+                while (mostRight.right != null && mostRight.right != root) {
+                    mostRight = mostRight.right;
+                }
+
+                //走到这里，要么mostRight.right == null，要么mostRight.right == root
+                if (mostRight.right == null) {
+                    mostRight.right = root;
+                    root = root.left;
+                    continue;
+                } else {
+                    mostRight.right = null;
+                }
+            }
+
+            /**
+             * 如果当前节点没有左节点，那么一定先到这里
+             * 如果当前节点有左节点，会走到上面的else，然后再走到这里
+             */
+            list.add(root.val);
+            //左子树为空，直接向右走
+            root = root.right;
+        }
+
+        return list;
+    }
 }
