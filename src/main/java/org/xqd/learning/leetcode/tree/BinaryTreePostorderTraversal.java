@@ -20,6 +20,58 @@ public class BinaryTreePostorderTraversal {
 
     public static List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
+        TreeNode cur = root;
+        while (root != null) {
+            TreeNode mostRight = root.left;
+            if (mostRight != null) {
+                while (mostRight.right != null && mostRight.right != root) {
+                    mostRight = mostRight.right;
+                }
+
+                if (mostRight.right == null) {
+                    mostRight.right = root;
+                    root = root.left;
+                    continue;
+                } else {
+                    mostRight.right = null;
+                    //将当前节点的左节点的右子树逆序打印
+                    addNodeIntoList(root.left, list);
+                }
+            }
+
+            root = root.right;
+        }
+        addNodeIntoList(cur, list);
+
+        return list;
+    }
+
+    private static void addNodeIntoList(TreeNode root, List<Integer> list){
+        TreeNode node = convertTreeNode(root);
+        while (node != null) {
+            list.add(node.val);
+            node = node.right;
+        }
+        convertTreeNode(node);
+    }
+
+    private static TreeNode convertTreeNode(TreeNode root) {
+        TreeNode cur = root;
+        TreeNode pre = null;
+
+        while (cur != null) {
+            TreeNode next = cur.right;
+            cur.right = pre;
+            pre = cur;
+            cur = next;
+        }
+
+        return pre;
+    }
+
+
+    public static List<Integer> postorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
 
         Set<TreeNode> set = new HashSet<>();
