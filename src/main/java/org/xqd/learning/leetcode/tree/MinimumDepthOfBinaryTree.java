@@ -8,7 +8,7 @@ import org.xqd.learning.leetcode.pojo.TreeNode;
  * 111. Minimum Depth of Binary Tree
  */
 public class MinimumDepthOfBinaryTree {
-    public int minDepth(TreeNode root) {
+    public int minDepth1(TreeNode root) {
         if (root == null) {
             return 0;
         }
@@ -20,5 +20,9 @@ public class MinimumDepthOfBinaryTree {
         } else {
             return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
         }
+    }
+
+    public int minDepth(TreeNode root) {
+        return 0;
     }
 }
