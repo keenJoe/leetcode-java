@@ -9,55 +9,30 @@ import java.util.Stack;
  * 109. Convert Sorted List to Binary Search Tree
  */
 public class ConvertSortedList2BinarySearchTree {
+
+    /**
+     * 分治思想，递归遍历
+     */
     public TreeNode sortedListToBST(ListNode head) {
-        if (head == null) return null;
-
-        int length = getListNodeLength(head);
-        int mid = length / 2;
-        System.out.println(mid);
-
-        ListNode temp = head;
-        Stack<TreeNode> stack = new Stack<>();
-
-        int index = 0;
-        while (index < mid) {
-            TreeNode treeNode = new TreeNode(temp.val);
-            System.out.println(temp.val);
-            stack.add(treeNode);
-            temp = temp.next;
-            index++;
-        }
-
-        TreeNode root = new TreeNode(temp.val);
-
-        TreeNode left = root;
-        while (!stack.isEmpty()) {
-            TreeNode pop = stack.pop();
-            if (pop.val != root.val) {
-                left.left = new TreeNode(pop.val);
-                left = left.left;
-            }
-        }
-
-        TreeNode right = root;
-        while (temp != null) {
-            if (temp.val != root.val) {
-                right.right = new TreeNode(temp.val);
-                right = right.right;
-            }
-
-            temp = temp.next;
-        }
-
-        return root;
+        //计算链表长度
+        int n = 0;
+        ListNode cur = head;
+        while (cur != null && ++n >= 0) cur = cur.next;
+        return build(head, 0, n - 1);
     }
 
-    public int getListNodeLength(ListNode head) {
-        int legnth = 0;
-        while (head != null) {
-            legnth += 1;
-            head = head.next;
-        }
-        return legnth;
+    private TreeNode build(ListNode head, int left, int right) {
+        if (left > right) return null;
+
+        int mid = left + right >> 1;
+        int step = mid - left;
+        ListNode cur = head;
+        //找到当前的根节点
+        while (step-- > 0) cur = cur.next;
+
+        TreeNode root = new TreeNode(cur.val);
+        root.left = build(head, left, mid - 1);
+        root.right = build(cur.next, mid + 1, right);
+        return root;
     }
 }
