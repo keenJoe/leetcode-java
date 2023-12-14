@@ -2,9 +2,7 @@ package org.xqd.learning.leetcode.tree;
 
 import org.xqd.learning.leetcode.pojo.TreeNode;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 100. Same Tree
@@ -12,6 +10,35 @@ import java.util.Stack;
  * @author qidongxu
  */
 public class SameTree {
+
+    /**
+     * 使用一个队列实现广度优先搜索
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        // 广度优先
+        Queue<TreeNode> tmpQueue = new LinkedList<TreeNode>();
+        tmpQueue.offer(p);
+        tmpQueue.offer(q);
+        while(!tmpQueue.isEmpty()){
+            p = tmpQueue.poll();
+            q = tmpQueue.poll();
+            if(p == null && q == null){
+                continue;
+            }
+            if((p == null || q == null) || p.val != q.val){
+                return false;
+            }
+            tmpQueue.offer(p.left);
+            tmpQueue.offer(q.left);
+
+            tmpQueue.offer(p.right);
+            tmpQueue.offer(q.right);
+        }
+        return true;
+    }
 
     /**
      * 深度优先搜索
