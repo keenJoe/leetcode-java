@@ -3,9 +3,6 @@ package org.xqd.learning.leetcode.tree;
 import org.xqd.learning.leetcode.pojo.ListNode;
 import org.xqd.learning.leetcode.pojo.TreeNode;
 
-import java.util.List;
-import java.util.Stack;
-
 /**
  * 109. Convert Sorted List to Binary Search Tree
  */
@@ -50,7 +47,7 @@ public class ConvertSortedList2BinarySearchTree {
         int n = 0;
         ListNode cur = head;
         while (cur != null && ++n >= 0) cur = cur.next;
-        return build(head, 0, n - 1);
+        return build1(head, 0, n - 1);
     }
 
     private TreeNode build1(ListNode head, int left, int right) {

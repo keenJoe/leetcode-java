@@ -11,6 +11,22 @@ import java.util.Queue;
  * @author qidongxu
  */
 public class MaximumDepthOfBinaryTree {
+
+    public static void main(String[] args) {
+        int i = 1;
+        int temp = i;
+        i++;
+        i = temp;
+        System.out.println(i);
+
+        int count = 0;
+        for (int i1 = 0; i1 < 100; i1++) {
+            count = count++;
+            System.out.println(count);
+        }
+        System.out.println("count = " + count);
+    }
+
     public int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;
@@ -26,7 +42,7 @@ public class MaximumDepthOfBinaryTree {
         queue.add(root);
 
         int depth = 0;
-        while (queue.size() > 0) {
+        while (!queue.isEmpty()) {
             int size = queue.size();
             while (size > 0) {
                 TreeNode cur = queue.poll();

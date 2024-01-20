@@ -12,11 +12,31 @@ import java.util.Queue;
  */
 public class SerializeAndDeserializeBST {
     // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        if (root == null) {
+            return "";
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+
+        }
+
+        return null;
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        return null;
+    }
 
     /**
      * 层序遍历serialize BST
      */
-    public String serialize(TreeNode root) {
+    public String serialize1(TreeNode root) {
         if (root == null) {
             return "";
         }
@@ -50,7 +70,7 @@ public class SerializeAndDeserializeBST {
      * @param data
      * @return
      */
-    public TreeNode deserialize(String data) {
+    public TreeNode deserialize1(String data) {
         if (data.isEmpty()) {
             return null;
         }
