@@ -60,4 +60,48 @@ public class BinaryTreePreorderTraversal {
 
         return list;
     }
+
+    public static void main(String[] args) {
+        TreeNode node2 = new TreeNode(3);
+        TreeNode node1 = new TreeNode(2);
+        TreeNode root = new TreeNode(1);
+
+        root.right = node1;
+        root.left = null;
+
+        node1.left = node2;
+        node1.right = null;
+
+        preorderTraversal2(root);
+    }
+
+    //错误写法
+    public static List<Integer> preorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+
+        while (!stack.isEmpty()) {
+            System.out.println("当前根节点是：" + root.val);
+            while(root.left != null) {
+                list.add(root.val);
+                root = root.left;
+                stack.add(root);
+            }
+
+            TreeNode node = root.right;
+//            System.out.println("当前node节点是：" + node.val);
+            if (node == null) {
+                node = stack.pop();
+                root = node.right;
+            } else {
+                root = node;
+            }
+            System.out.println("=================");
+        }
+
+        return list;
+    }
 }
