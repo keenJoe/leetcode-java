@@ -12,6 +12,42 @@ import java.util.Stack;
  */
 public class BinaryTreeInorderTraversal {
 
+    //使用栈模拟递归
+    public static List<Integer> inorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (!stack.isEmpty() || root != null) {
+            //模拟在递归中一直向左遍历
+            while (root != null) {
+                stack.add(root);
+                root = root.left;
+//                list.add(root.val);
+            }
+            //已经走到最左的节点
+            TreeNode node = stack.peek();
+            list.add(node.val);
+            root = node.right;
+        }
+
+        return list;
+    }
+
+    public static List<Integer> inorderTraversal3(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        return f(root,list);
+    }
+
+    private static List<Integer> f(TreeNode root, List<Integer> list) {
+        if (root == null) return list;
+
+        if (root.left != null) f(root.left,list);
+        list.add(root.val);
+        if (root.right != null) f(root.right,list);
+        return list;
+    }
+
+
     /**
      * 二叉树的中序遍历
      * 非递归的方法
