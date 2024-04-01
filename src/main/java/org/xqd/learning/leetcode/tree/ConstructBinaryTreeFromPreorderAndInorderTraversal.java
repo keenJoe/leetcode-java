@@ -14,28 +14,33 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         indexMap = new HashMap<>();
-        int n = inorder.length;
-
+        //遍历inorder，构建位置索引
         for (int i = 0; i < inorder.length; i++) {
-            indexMap.put(inorder[i], i);
+            indexMap.put(i, inorder[i]);
         }
-
-        return build(preorder, inorder, 0, n - 1, 0, n - 1);
+        return build(preorder, inorder, 0, preorder.length - 1, 0, inorder.length - 1);
     }
 
     private TreeNode build(int[] preorder, int[] inorder, int preLeft, int preRight, int inLeft, int inRight) {
-        if (preLeft > preRight) return null;
+        //终止条件
+        if (preLeft > preRight) {
+            //返回一个空树
+            return null;
+        }
 
+        //当前树的根结点索引
         int rootIndex = preLeft;
+        //确认根结点在中序遍历的位置
+        int inorderRootIndex = indexMap.get(preorder[rootIndex]);
+        //左子树的数量
+//        int step = inorderRootIndex - rootIndex;(错误的写法)
+        int step = inorderRootIndex - inLeft;
+        //构建根节点
         TreeNode root = new TreeNode(preorder[rootIndex]);
-        int rootIndexInInorder = indexMap.get(preorder[rootIndex]);
-        //计算左子树的长度
-        int size = rootIndexInInorder - inLeft;
-
-        //递归构建左子树
-        root.left = build(preorder, inorder, preLeft + 1, preLeft + size, inLeft, rootIndexInInorder - 1);
-        //递归构建右子树
-        root.right = build(preorder, inorder, preLeft + 1 + size, preRight, rootIndexInInorder + 1, inRight);
+        //构建左子树
+        root.left = build(preorder, inorder, rootIndex + 1, rootIndex + step, inLeft, inorderRootIndex - 1);
+        //构建右子树
+        root.right = build(preorder, inorder, rootIndex + step + 1, preRight, inorderRootIndex + 1, inRight);
 
         return root;
     }
