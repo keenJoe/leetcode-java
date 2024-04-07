@@ -2,46 +2,51 @@ package org.xqd.learning.leetcode.tree;
 
 import org.xqd.learning.leetcode.pojo.TreeNode;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class BinaryTreeLevelOrderTraversalII {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<List<Integer>> all = new ArrayList<>();
-        if (root == null) return all;
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) return list;
 
-        Deque<List<Integer>> allDeque = new ArrayDeque<>();
+        Deque<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        boolean fromLeft = true;
 
-        Deque<TreeNode> deque = new ArrayDeque<>();
-        deque.add(root);
-        List<Integer> list = new ArrayList<>();
-        list.add(root.val);
-        allDeque.addFirst(list);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> childList = new ArrayList<>();
+            Stack<TreeNode> stack = new Stack<>();
 
-        while (!deque.isEmpty()) {
-            int size = deque.size();
-            list = new ArrayList<>();
             for (int i = 0; i < size; i++) {
-                TreeNode node = deque.pollFirst();
-                list.add(node.val);
-                if (node.left != null) {
-                    deque.add(node.left);
-                }
+                TreeNode node = queue.pollFirst();
+                childList.add(node.val);
+                stack.add(node);
+            }
 
-                if (node.right != null) {
-                    deque.add(node.right);
+            while (!stack.isEmpty()) {
+                TreeNode node = stack.pop();
+                if (fromLeft) {
+                    if (node.right != null) {
+                        queue.addLast(node.right);
+                    }
+                    if (node.left != null) {
+                        queue.addLast(node.left);
+                    }
+                } else {
+                    if (node.left != null) {
+                        queue.addLast(node.left);
+                    }
+                    if (node.right != null) {
+                        queue.addLast(node.right);
+                    }
                 }
             }
 
-            allDeque.addFirst(list);
+            fromLeft = !fromLeft;
+            list.add(childList);
         }
 
-        for (int i = 0; i < allDeque.size(); i++) {
-            all.add(allDeque.pollFirst());
-        }
-
-        return all;
+        return list;
     }
 }
