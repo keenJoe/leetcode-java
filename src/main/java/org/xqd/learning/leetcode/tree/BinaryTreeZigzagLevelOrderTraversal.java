@@ -5,7 +5,7 @@ import org.xqd.learning.leetcode.pojo.TreeNode;
 import java.util.*;
 
 /**
- *
+ * 103. Binary Tree Zigzag Level Order Traversal
  */
 public class BinaryTreeZigzagLevelOrderTraversal {
     public static void main(String[] args) {
@@ -23,6 +23,9 @@ public class BinaryTreeZigzagLevelOrderTraversal {
         TreeNode root = new TreeNode(3, rootLeft, rootRight);
         List<List<Integer>> list = zigzagLevelOrder(root);
         System.out.println(list);
+
+
+        List<List<Integer>> all = new LinkedList<>();
     }
 
 
