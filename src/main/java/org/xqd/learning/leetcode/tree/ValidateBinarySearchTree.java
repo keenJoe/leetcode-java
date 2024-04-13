@@ -1,4 +1,4 @@
-package org.xqd.learning.leetcode.answer.top100;
+package org.xqd.learning.leetcode.tree;
 
 import org.xqd.learning.leetcode.pojo.TreeNode;
 
@@ -6,16 +6,6 @@ import org.xqd.learning.leetcode.pojo.TreeNode;
  * LeetCode 98. Validate Binary Search Tree
  */
 public class ValidateBinarySearchTree {
-    public static void main(String[] args) {
-        TreeNode node4 = new TreeNode(4, null, null);
-        TreeNode node7 = new TreeNode(7, null, null);
-        TreeNode node3 = new TreeNode(3, null, null);
-        TreeNode node6 = new TreeNode(6, node3, node7);
-        TreeNode node5 = new TreeNode(5, node4, node6);
-
-        System.out.println(isValidBST(node5));
-    }
-
     /**
      * 目前这个方法只能保证 root 和它的 child 能构成 BST，但是不能保证整个 tree 是 BST
      *

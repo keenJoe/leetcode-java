@@ -13,22 +13,23 @@ public class SameTree {
 
     /**
      * 使用一个队列实现广度优先搜索
+     *
      * @param p
      * @param q
      * @return
      */
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    public boolean isSameTree3(TreeNode p, TreeNode q) {
         // 广度优先
         Queue<TreeNode> tmpQueue = new LinkedList<TreeNode>();
         tmpQueue.offer(p);
         tmpQueue.offer(q);
-        while(!tmpQueue.isEmpty()){
+        while (!tmpQueue.isEmpty()) {
             p = tmpQueue.poll();
             q = tmpQueue.poll();
-            if(p == null && q == null){
+            if (p == null && q == null) {
                 continue;
             }
-            if((p == null || q == null) || p.val != q.val){
+            if ((p == null || q == null) || p.val != q.val) {
                 return false;
             }
             tmpQueue.offer(p.left);
@@ -71,7 +72,7 @@ public class SameTree {
 
                 if (pNode.left == null && qNode.left != null) {
                     return false;
-                } else if  (pNode.left != null && qNode.left == null) {
+                } else if (pNode.left != null && qNode.left == null) {
                     return false;
                 } else if (pNode.left != null && qNode.left != null) {
                     pDeque.add(pNode.left);
@@ -80,7 +81,7 @@ public class SameTree {
 
                 if (pNode.right == null && qNode.right != null) {
                     return false;
-                } else if  (pNode.right != null && qNode.right == null) {
+                } else if (pNode.right != null && qNode.right == null) {
                     return false;
                 } else if (pNode.right != null && qNode.right != null) {
                     pDeque.add(pNode.right);
@@ -156,5 +157,18 @@ public class SameTree {
         }
 
         return true;
+    }
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        //先考虑边界情况
+        if (p == null && q == null) {
+            return true;
+        }
+
+        if ((p == null && q != null) || (p != null && q == null)) {
+            return false;
+        }
+
+        return p.val == q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 }
