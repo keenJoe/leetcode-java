@@ -43,7 +43,7 @@ public class ValidateBinarySearchTree {
         }
     }
 
-    public static boolean isValidBST(TreeNode root) {
+    public static boolean isValidBST1(TreeNode root) {
         return getChildrenInfo(root).isBST;
     }
 
@@ -121,5 +121,19 @@ public class ValidateBinarySearchTree {
         }
 
         return rv;
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        //如果先判断最下面的子树是否符合条件呢？
+        return isValidBSTWithMinAndMax(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean isValidBSTWithMinAndMax(TreeNode root, long min, long max) {
+        if (root == null) {
+            return true;
+        }
+
+        int value = root.val;
+        return min < value && max > value && isValidBSTWithMinAndMax(root.left, min, value) && isValidBSTWithMinAndMax(root.right, value, max);
     }
 }
