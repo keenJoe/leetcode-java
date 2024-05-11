@@ -8,30 +8,39 @@ import java.util.*;
  * 257. Binary Tree Paths
  */
 public class BinaryTreePaths {
+    List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    Deque<Integer> path = new LinkedList<Integer>();
+
     public List<String> binaryTreePaths(TreeNode root) {
-        Deque<Integer> deque = new ArrayDeque<>();
-        Stack<TreeNode> stack = new Stack<>();
-
-        while (root != null || !stack.isEmpty()) {
-            while (root != null) {
-                deque.addLast(root.val);
-                stack.add(root);
-                root = root.left;
-            }
-
-            root = stack.pop();
-            root = root.right;
-            if (root == null) {
-                StringBuilder builder = new StringBuilder();
-                Iterator<Integer> iterator = deque.iterator();
-                while (iterator.hasNext()) {
-                    builder.append(iterator.next());
-                    builder.append("->");
+        dfs(root);
+        List<String> list = new ArrayList<>();
+        for (List<Integer> integers : ret) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < integers.size(); i++) {
+                if (i != integers.size() - 1) {
+                    builder.append(integers.get(i)).append("->");
+                } else {
+                    builder.append(integers.get(i));
                 }
-                deque.removeLast();
             }
+            list.add(builder.toString());
+        }
+        return list;
+    }
+
+    public void dfs(TreeNode root) {
+        if (root == null) {
+            return;
         }
 
-        return null;
+        //前序遍历
+        path.offerLast(root.val);
+        if (root.left == null && root.right == null) {
+            ret.add(new LinkedList<Integer>(path));
+        }
+        dfs(root.left);
+        dfs(root.right);
+        //这一步最关键
+        path.pollLast();
     }
 }
