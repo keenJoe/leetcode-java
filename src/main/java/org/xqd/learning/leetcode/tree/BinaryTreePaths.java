@@ -3,6 +3,7 @@ package org.xqd.learning.leetcode.tree;
 import org.xqd.learning.leetcode.pojo.TreeNode;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 257. Binary Tree Paths
@@ -42,5 +43,38 @@ public class BinaryTreePaths {
         dfs(root.right);
         //这一步最关键
         path.pollLast();
+    }
+
+    public List<String> binaryTreePaths1(TreeNode root) {
+        Deque<Integer> path = new ArrayDeque<>();
+        List<String> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.add(root);
+                path.add(root.val);
+                root = root.left;
+            }
+
+            root = stack.pop();
+            //此时找到一个符合的path
+            if (root.left == null && root.right == null) {
+                list.add(createStr(path));
+            }
+            root = root.right;
+            if (root == null) {
+                path.removeLast();
+            }
+        }
+
+        return list;
+    }
+
+    private String createStr(Deque<Integer> path) {
+        String formattedString = path.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining("-->", "", ""));
+        return formattedString;
     }
 }
