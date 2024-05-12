@@ -2,6 +2,9 @@ package org.xqd.learning.leetcode.tree;
 
 import org.xqd.learning.leetcode.pojo.TreeNode;
 
+/**
+ * 450. Delete Node in a BST
+ */
 public class DeleteNodeInABST {
     public TreeNode deleteNode(TreeNode root, int key) {
         TreeNode leftTree = null;
