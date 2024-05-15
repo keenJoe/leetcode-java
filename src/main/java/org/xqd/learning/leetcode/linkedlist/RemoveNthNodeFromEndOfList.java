@@ -36,7 +36,7 @@ public class RemoveNthNodeFromEndOfList {
         return dummy.next;
     }
 
-     public int nodeLength(ListNode head) {
+    public int nodeLength(ListNode head) {
         int length = 0;
 
         while (head != null) {
@@ -45,11 +45,12 @@ public class RemoveNthNodeFromEndOfList {
         }
 
         return length;
-     }
+    }
 
 
     /**
-     *  two pointers
+     * two pointers
+     *
      * @param head
      * @param n
      * @return
@@ -60,11 +61,11 @@ public class RemoveNthNodeFromEndOfList {
         slow.next = head;
 
         //Move fast in front so that the gap between slow and fast becomes n
-        for(int i=1; i<=n+1; i++)   {
+        for (int i = 1; i <= n + 1; i++) {
             fast = fast.next;
         }
         //Move fast to the end, maintaining the gap
-        while(fast != null) {
+        while (fast != null) {
             slow = slow.next;
             fast = fast.next;
         }
