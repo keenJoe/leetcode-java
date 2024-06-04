@@ -24,4 +24,9 @@ public class MergeTwoSortedLists {
         if (list2 != null) head.next = list2;
         return dummy.next;
     }
+
+    //写一个递归试试，真冥思苦想
+    public ListNode mergeTwoLists1(ListNode list1, ListNode list2) {
+        return null;
+    }
 }
