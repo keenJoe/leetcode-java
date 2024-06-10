@@ -7,6 +7,22 @@ import org.xqd.learning.leetcode.pojo.ListNode;
  */
 public class RemoveDuplicatesFromSortedListII {
     public ListNode deleteDuplicates(ListNode head) {
-        return null;
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode pre = dummy;
+        while (head != null && head.next != null) {
+            if (head.val == head.next.val) {
+                int x = head.val;
+                while (head != null && head.next != null && head.next.val == x) {
+                    head = head.next;
+                }
+                pre.next = head.next;
+            } else {
+                pre = head;
+            }
+            head = head.next;
+        }
+
+        return dummy.next;
     }
 }
