@@ -2,6 +2,8 @@ package org.xqd.learning.leetcode.linkedlist2024;
 
 import org.xqd.learning.leetcode.pojo.ListNode;
 
+import java.io.Serializable;
+
 /**
  * 19. Remove Nth Node From End of List
  */
@@ -39,5 +41,38 @@ public class RemoveNthNodeFromEndOfList {
         }
 
         return length;
+    }
+
+    public ListNode removeNthFromEnd1(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        int length = nodeLength(head);
+
+        //从cur开始遍历，保证整个链表只有一个的情况
+        ListNode cur = dummy;
+        for (int i = 1; i < length - n + 1; ++i) {
+            cur = cur.next;
+        }
+
+        cur.next = cur.next.next;
+        ListNode ans = dummy.next;
+        return ans;
+    }
+
+    //使用快慢指针删除节点
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        ListNode dummy = new ListNode(0, head);
+        ListNode slow = dummy;
+        ListNode fast = head;
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+        return dummy.next;
     }
 }
