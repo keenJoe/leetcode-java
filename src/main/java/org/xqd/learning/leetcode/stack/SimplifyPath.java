@@ -10,43 +10,23 @@ public class SimplifyPath {
         if (path == null || path.isEmpty()) return null;
 
         String[] split = path.trim().split("/");
-        if (split.length == 0) return "/";
-
         ArrayDeque<String> deque = new ArrayDeque<>();
 
-        for (int i = 0; i < split.length; i++) {
-            String s = split[i];
+        for (String s : split) {
             if (s != null && !s.isEmpty()) {
                 if (s.equals(".")) {
-                    String last = deque.peekLast();
-                    if (last == null) {
-                        deque.addLast("/");
-                    }
+                    continue;
                 } else if (s.equals("..")) {
                     //从队尾取出一个元素
-                    String last = deque.peekLast();
-                    if (last == null) {
-                        deque.addLast("/");
-                    } else if ("/".equals(last)) {
-                        continue;
-                    } else {
-                        deque.pollLast();
-                        if (deque.peekLast() == null) {
-                            deque.addLast("/");
-                        }
-                    }
+                    deque.pollLast();
                 } else {
-                    String last = deque.peekLast();
-                    if ("/".equals(last)) {
-                        deque.addLast(s);
-                    } else {
-                        deque.addLast("/" + s);
-                    }
+                    deque.addLast("/" + s);
                 }
             }
         }
 
-        System.out.println(deque);
+        if (deque.isEmpty()) return "/";
+
         StringBuilder builder = new StringBuilder();
         for (String s : deque) {
             builder.append(s);
